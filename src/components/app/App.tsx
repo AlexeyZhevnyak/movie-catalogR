@@ -7,8 +7,8 @@ import {Movie} from "../../model/movie";
 function App() {
 
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [tempMovies, setTempMovies] = useState<Movie[]>([]);
     const [genre, setGenre] = useState("");
-
 
     useEffect(() => {
         fetch("http://localhost:4000/movies?limit=12")
@@ -16,6 +16,7 @@ function App() {
             .then(
                 (result) => {
                     setMovies(result.data);
+                    setTempMovies(result.data);
                 })
     }, [])
 
@@ -56,15 +57,26 @@ function App() {
         }
     ];
 
+
     return (
         <div className={styles.wrapper}>
+            <div>
+                <input type={"text"} onKeyUp={(event) => {
+                    const e = event.target as HTMLInputElement;
+                    console.log(e.value)
+                    setTempMovies(movies.filter(m => m.title.toUpperCase().includes(e.value.toUpperCase())))
+                }}/>
+            </div>
             <div className={styles.filter_sort_menu}>
                 <div className={styles.genres}>
                     {
                         genres.map(g => <div key={g} onClick={
-                            () => setMovies(
-                                movies.filter(m => m.genres.includes(g))
-                            )
+                            () => {
+                                if (g === "All") {
+                                    setTempMovies(movies)
+                                } else
+                                    setTempMovies(movies.filter(m => m.genres.includes(g)))
+                            }
                         }
                         >{g}</div>)}
                 </div>
@@ -75,9 +87,9 @@ function App() {
                     </select>
                 </div>
             </div>
-            <div style={{alignSelf: "center"}}>{movies.length} movies found</div>
+            <div style={{alignSelf: "center"}}>{tempMovies.length} movies found</div>
             <div className={styles.cards}>
-                {movies.map(m => <MovieCard key={m.id} {...m}/>)}
+                {tempMovies.map(m => <MovieCard key={m.id} {...m}/>)}
             </div>
         </div>
     );
