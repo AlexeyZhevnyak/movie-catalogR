@@ -3,13 +3,19 @@ import styles from './App.module.css';
 import MovieCard from "../movie-card/MovieCard";
 import {SelectOption} from "../../model/selectOption";
 import {Movie} from "../../model/movie";
+import {createStore} from "redux";
+import {reducer} from "../../redux/reducer";
+import {initialState} from "../../redux/MyState";
+import {FindHeader} from "../find-header/FindHeader";
+import {MovieDetailsHeader} from "../movieDetailsHeader/MovieDetailsHeader";
+
+const store = createStore(reducer as any, initialState,)
+export const StoreContext = React.createContext(store);
 
 function App() {
 
     const [movies, setMovies] = useState<Movie[]>([]);
     const [tempMovies, setTempMovies] = useState<Movie[]>([]);
-    const [genre, setGenre] = useState("");
-
     useEffect(() => {
         fetch("http://localhost:4000/movies?limit=12")
             .then(res => res.json())
@@ -57,41 +63,46 @@ function App() {
         }
     ];
 
+    store.subscribe(() =>
+        setTempMovies(movies.filter(m =>
+            m.title.toUpperCase().includes(store.getState().movie_to_find.toUpperCase())))
+    )
+
 
     return (
-        <div className={styles.wrapper}>
-            <div>
-                <input type={"text"} onKeyUp={(event) => {
-                    const e = event.target as HTMLInputElement;
-                    console.log(e.value)
-                    setTempMovies(movies.filter(m => m.title.toUpperCase().includes(e.value.toUpperCase())))
-                }}/>
-            </div>
-            <div className={styles.filter_sort_menu}>
-                <div className={styles.genres}>
-                    {
-                        genres.map(g => <div key={g} onClick={
-                            () => {
-                                if (g === "All") {
-                                    setTempMovies(movies)
-                                } else
-                                    setTempMovies(movies.filter(m => m.genres.includes(g)))
+        <StoreContext.Provider value={store}>
+            <div className={styles.wrapper}>
+                {store.getState().isCardClicked ? <MovieDetailsHeader movie={store.getState().clicked_card}/> : <FindHeader/>}
+
+                <div className={styles.filter_sort_menu}>
+                    <div className={styles.genres}>
+                        {
+                            genres.map(g => <div key={g} onClick={
+                                () => {
+                                    if (g === "All") {
+                                        setTempMovies(movies)
+                                    } else
+                                        setTempMovies(movies.filter(m => m.genres.includes(g)))
+                                }
                             }
-                        }
-                        >{g}</div>)}
+                            >{g}</div>)}
+                    </div>
+                    <div className={styles.select_sort}>
+                        <span className={styles.sort_text}>SORT BY</span>
+                        <select>
+                            {sortFields.map(sf => <option key={sf.title}>{sf.title}</option>)}
+                        </select>
+                    </div>
                 </div>
-                <div className={styles.select_sort}>
-                    <span className={styles.sort_text}>SORT BY</span>
-                    <select>
-                        {sortFields.map(sf => <option key={sf.title}>{sf.title}</option>)}
-                    </select>
+                <div style={{alignSelf: "center"}}>{tempMovies.length} movies found</div>
+                <div className={styles.cards}>
+                    {tempMovies.map(m => <MovieCard movie={m} onClick={() => store.dispatch({
+                        type: 'CARD_CLICK',
+                        payload: m
+                    })} key={m.id}/>)}
                 </div>
             </div>
-            <div style={{alignSelf: "center"}}>{tempMovies.length} movies found</div>
-            <div className={styles.cards}>
-                {tempMovies.map(m => <MovieCard key={m.id} {...m}/>)}
-            </div>
-        </div>
+        </StoreContext.Provider>
     );
 }
 
