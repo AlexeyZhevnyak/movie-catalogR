@@ -5,7 +5,7 @@ import {SelectOption} from "../../model/selectOption";
 import {Movie} from "../../model/movie";
 import {createStore} from "redux";
 import {reducer} from "../../redux/reducer";
-import {initialState} from "../../redux/MyState";
+import {initialState} from "../../redux/State";
 import {FindHeader} from "../find-header/FindHeader";
 import {MovieDetailsHeader} from "../movieDetailsHeader/MovieDetailsHeader";
 
@@ -22,10 +22,19 @@ function App() {
             .then(
                 (result) => {
                     setMovies(result.data);
-                    setTempMovies(result.data);
+                    setTempMovies(result.data.sort((a: Movie, b: Movie) => Number(a[sortFields[0].field]) - Number(b[sortFields[0].field])));
+                    console.log("snova")
                 })
     }, [])
 
+    const sortFunction = (event: React.MouseEvent<Element, MouseEvent>) => {
+        const element = event.target as HTMLSelectElement;
+        const field = element.value as keyof Movie;
+        if (field === "release_date") {
+            setTempMovies([...tempMovies.sort((a: Movie, b: Movie) => new Date(a[field]).getTime() - new Date(b[field]).getTime())])
+        } else
+            setTempMovies([...tempMovies.sort((a: Movie, b: Movie) => Number(a[field]) - Number(b[field]))])
+    }
 
     const genres: string[] = [
         "All",
@@ -72,7 +81,10 @@ function App() {
     return (
         <StoreContext.Provider value={store}>
             <div className={styles.wrapper}>
-                {store.getState().isCardClicked ? <MovieDetailsHeader movie={store.getState().clicked_card}/> : <FindHeader/>}
+                {store.getState().isCardClicked ?
+                    <MovieDetailsHeader onClick={() => store.dispatch({type: 'SWITCH_TO_FIND_CLICK'})}
+                                        movie={store.getState().clicked_card}/> :
+                    <FindHeader/>}
 
                 <div className={styles.filter_sort_menu}>
                     <div className={styles.genres}>
@@ -89,8 +101,9 @@ function App() {
                     </div>
                     <div className={styles.select_sort}>
                         <span className={styles.sort_text}>SORT BY</span>
-                        <select>
-                            {sortFields.map(sf => <option key={sf.title}>{sf.title}</option>)}
+                        <select onClick={(event) => sortFunction(event)}>
+                            {sortFields.map(sf => <option value={sf.field}
+                                                          key={sf.title}>{sf.title}</option>)}
                         </select>
                     </div>
                 </div>

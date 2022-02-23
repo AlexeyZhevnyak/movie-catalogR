@@ -7,7 +7,7 @@
 
 .filter_sort_menu {
     display: flex;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     border-bottom: 3px solid rgb(47, 44, 44);
 }
 
@@ -55,4 +55,5 @@ option {
     display: grid;
     justify-content: space-around;
     grid-template-rows:auto 10vh auto;
+    grid-template-columns: 0.7fr;
 }
