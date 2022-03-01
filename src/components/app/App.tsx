@@ -8,24 +8,34 @@ import {reducer} from "../../redux/reducer";
 import {initialState} from "../../redux/State";
 import {FindHeader} from "../find-header/FindHeader";
 import {MovieDetailsHeader} from "../movieDetailsHeader/MovieDetailsHeader";
+import {Route, Router} from "react-router";
+import {MovieList} from "../list/MovieList";
+import {GenreList} from "../GenreList/GenreList";
+import {SelectSort} from "../SelectSort/SelectSort";
+import {useDownloadMovies} from "../../hooks/DownloadMovies";
 
 const store = createStore(reducer as any, initialState,)
 export const StoreContext = React.createContext(store);
 
 function App() {
 
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const [tempMovies, setTempMovies] = useState<Movie[]>([]);
-    useEffect(() => {
-        fetch("http://localhost:4000/movies?limit=12")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setMovies(result.data);
-                    setTempMovies(result.data.sort((a: Movie, b: Movie) => Number(a[sortFields[0].field]) - Number(b[sortFields[0].field])));
-                    console.log("snova")
-                })
-    }, [])
+    // const [movies, setMovies] = useState<Movie[]>([])
+    const [tempMovies, setTempMovies] = useState<Movie[]>([])
+
+    var movies = useDownloadMovies("http://localhost:4000/movies?limit=12");
+    // setTempMovies(movies)
+    // useEffect(() => {
+    //     fetch("http://localhost:4000/movies?limit=12")
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 setMovies(result.data);
+    //                 setTempMovies(result.data.sort((a: Movie, b: Movie) => Number(a[sortFields[0].field]) - Number(b[sortFields[0].field])));
+    //             })
+    // }, [])
+
+    // setMovies(useDownloadMovies("http://localhost:4000/movies?limit=12"))
+    // setTempMovies(movies);
 
     const sortFunction = (event: React.MouseEvent<Element, MouseEvent>) => {
         const element = event.target as HTMLSelectElement;
@@ -35,6 +45,7 @@ function App() {
         } else
             setTempMovies([...tempMovies.sort((a: Movie, b: Movie) => Number(a[field]) - Number(b[field]))])
     }
+
 
     const genres: string[] = [
         "All",
@@ -71,12 +82,24 @@ function App() {
             field: "runtime"
         }
     ];
-
+    const firstRender = () => {
+        if (tempMovies.length === 0)
+            return movies
+        return tempMovies
+    }
     store.subscribe(() =>
         setTempMovies(movies.filter(m =>
             m.title.toUpperCase().includes(store.getState().movie_to_find.toUpperCase())))
     )
 
+    const filterMovies = (event: React.MouseEvent<Element, MouseEvent>) => {
+        const target = event.target as HTMLElement;
+        if (target.innerText !== "All") {
+            movies = movies.filter(m => m.genres.includes(target.innerText))
+            console.log(movies)
+        }
+        setTempMovies([...movies]);
+    }
 
     return (
         <StoreContext.Provider value={store}>
@@ -88,31 +111,15 @@ function App() {
 
                 <div className={styles.filter_sort_menu}>
                     <div className={styles.genres}>
-                        {
-                            genres.map(g => <div key={g} onClick={
-                                () => {
-                                    if (g === "All") {
-                                        setTempMovies(movies)
-                                    } else
-                                        setTempMovies(movies.filter(m => m.genres.includes(g)))
-                                }
-                            }
-                            >{g}</div>)}
+                        <GenreList items={genres} onClick={(event) => filterMovies(event)}/>
                     </div>
                     <div className={styles.select_sort}>
-                        <span className={styles.sort_text}>SORT BY</span>
-                        <select onClick={(event) => sortFunction(event)}>
-                            {sortFields.map(sf => <option value={sf.field}
-                                                          key={sf.title}>{sf.title}</option>)}
-                        </select>
+                        <SelectSort sortFields={sortFields} sortFunction={sortFunction}/>
                     </div>
                 </div>
                 <div style={{alignSelf: "center"}}>{tempMovies.length} movies found</div>
                 <div className={styles.cards}>
-                    {tempMovies.map(m => <MovieCard movie={m} onClick={() => store.dispatch({
-                        type: 'CARD_CLICK',
-                        payload: m
-                    })} key={m.id}/>)}
+                    <MovieList movies={firstRender()}/>
                 </div>
             </div>
         </StoreContext.Provider>
