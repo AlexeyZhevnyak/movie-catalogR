@@ -1,8 +1,7 @@
 export function VerticalMenu(props: any) {
     return (
-        <>
-            <div>{props.left}</div>
-            <div>{props.right}</div>
-        </>
+        <div className={props.className}>
+            {props.children}
+        </div>
     )
 }
