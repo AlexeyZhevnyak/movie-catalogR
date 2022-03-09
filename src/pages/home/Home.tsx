@@ -3,13 +3,13 @@ import {Movie} from "../../model/movie";
 import {useDownloadMovies} from "../../hooks/DownloadMovies";
 import {SelectOption} from "../../model/selectOption";
 import styles from "./Home.module.css";
-import {MovieDetailsHeader} from "../movieDetailsHeader/MovieDetailsHeader";
-import {FindHeader} from "../findHeader/FindHeader";
-import {VerticalMenu} from "../menu/VerticalMenu";
-import {GenreList} from "../genreList/GenreList";
-import {SelectSort} from "../selectSort/SelectSort";
-import {MovieList} from "../list/MovieList";
-import {StoreContext} from "../app/App";
+import {MovieDetailsHeader} from "../../components/movieDetailsHeader/MovieDetailsHeader";
+import {FindHeader} from "../../components/findHeader/FindHeader";
+import {VerticalMenu} from "../../components/menu/VerticalMenu";
+import {GenreList} from "../../components/genreList/GenreList";
+import {SelectSort} from "../../components/selectSort/SelectSort";
+import {MovieList} from "../../components/list/MovieList";
+import {StoreContext} from "../../components/app/App";
 import {genres} from "../../model/genres";
 
 export function Home() {
@@ -73,7 +73,7 @@ export function Home() {
 
     return (
             <div className={styles.wrapper}>
-                {store.getState().isCardClicked ?
+                {store.getState().is_card_clicked ?
                     <MovieDetailsHeader onClick={() => store.dispatch({type: 'SWITCH_TO_FIND_CLICK'})}
                                         movie={store.getState().clicked_card}/> :
                     <FindHeader/>}

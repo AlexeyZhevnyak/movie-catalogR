@@ -1,8 +1,6 @@
-import styles from "../form/MovieForm.module.css"
-import React, {useState} from "react";
-import {Movie} from "../../model/movie";
-import axios from "axios";
-import {MovieForm} from "../form/MovieForm";
+import styles from "../../components/movieForm/MovieForm.module.css"
+import React from "react";
+import {MovieForm} from "../../components/movieForm/MovieForm";
 import {AddMovieDTO} from "../../model/add-movie-dto";
 
 export function Add() {
