@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStore} from "redux";
-import {reducer} from "../../redux/reducer";
+import {reducer} from "../../redux/Reducer";
 import {initialState} from "../../redux/State";
 import {
     BrowserRouter,

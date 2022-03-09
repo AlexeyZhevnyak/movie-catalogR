@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {Movie} from "../../model/movie";
 import axios from "axios";
 import {MovieForm} from "../form/MovieForm";
+import {AddMovieDTO} from "../../model/add-movie-dto";
 
 export function Add() {
     let movie = {
@@ -19,23 +20,22 @@ export function Add() {
         poster_path: ""
     };
 
-    const sendMovie = () => {
-        console.log(movie)
+    const sendMovie = (movieDto : AddMovieDTO) => {
+        console.log(movieDto)
         fetch("http://localhost:4000/movies", {
             method: 'POST',
             mode : 'cors',
             headers: {
                 'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify(movie)
+            body: JSON.stringify(movieDto)
         })
             .then(res => console.log(res))
     }
     return (
         <div className={styles.container}>
             <h1 className={styles.title_form}>ADD MOVIE</h1>
-            <MovieForm movie={movie} onClickEvent={sendMovie}/>
+            <MovieForm movie={movie} onSubmitEvent={sendMovie}/>
         </div>
     )
 }

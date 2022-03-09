@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {StoreContext} from "../app/App";
-import styles from "./FindHeader.module.css"
-export function FindHeader(props: any) {
+
+export function FindHeader() {
     const store = useContext(StoreContext);
     return (
         <div>

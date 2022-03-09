@@ -1,5 +1,5 @@
 import {Movie} from "../../model/movie";
-import MovieCard from "../movie-card/MovieCard";
+import MovieCard from "../movieCard/MovieCard";
 import React, {useContext} from "react";
 import {StoreContext} from "../app/App";
 
