@@ -1,0 +1,59 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-column-gap: 100px;
+    grid-row-gap: 20px;
+}
+
+.filter_sort_menu {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid rgb(47, 44, 44);
+}
+
+
+select {
+    background-color: rgb(23, 23, 23);
+    border: none;
+    outline: none;
+    font-size: 10pt;
+    color: white;
+}
+
+option {
+    border: none;
+    outline: none;
+    font-size: 10pt;
+    color: white;
+}
+
+.genres div, .select_sort {
+    padding: 20px;
+    z-index: 30;
+}
+
+.genres {
+    display: flex;
+}
+
+.genres div {
+    font-size: 10pt;
+}
+
+.genres div:hover {
+    border-bottom: 3px solid red;
+    cursor: pointer
+}
+
+.sort_text {
+    font-weight: 100;
+    margin-right: 10px;
+    font-size: 10pt;
+}
+
+.wrapper{
+    display: grid;
+    justify-content: space-around;
+    grid-template-rows:auto 10vh auto;
+    grid-template-columns: 0.7fr;
+}
