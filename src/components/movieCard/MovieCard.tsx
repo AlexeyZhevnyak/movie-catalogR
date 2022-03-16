@@ -1,13 +1,15 @@
-import styles from './MovieCard.module.css'
+import styles from './MovieCard.module.scss'
 import {Movie} from "../../model/movie";
 import {MouseEventHandler} from "react";
+import {MovieCardMenu} from "../movieCardMenu/MovieCardMenu";
 
 function MovieCard(props: {
     movie: Movie,
-    onClick : MouseEventHandler
+    onClick: MouseEventHandler
 }) {
     return (
         <div className={styles.outer} onClick={props.onClick}>
+            <MovieCardMenu movie={props.movie} className = {styles.movie_card_menu}/>
             <img src={props.movie.poster_path} className={styles.poster} alt={'poster'}/>
             <div className={styles.movie_details}>
                 <div className={styles.title_year}>

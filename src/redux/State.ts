@@ -1,12 +1,11 @@
 import {Movie} from "../model/movie";
-import {AddMovieDTO} from "../model/add-movie-dto";
 
 export interface State {
     is_card_clicked: boolean,
     movie_to_find: string,
     clicked_card: Movie,
     clicked_genre_filter: string,
-    movie_to_edit: AddMovieDTO;
+    movie_to_edit: Movie;
 }
 
 export const initialState: State = {
@@ -25,6 +24,7 @@ export const initialState: State = {
         overview: "",
         budget: 0,
         release_date: "",
-        poster_path: ""
+        poster_path: "",
+        id : 0
     }
 }

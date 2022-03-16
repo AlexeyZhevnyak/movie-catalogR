@@ -22,6 +22,7 @@ export function reducer(state: State, action: Action): State {
     }
 
     if (action.type === 'EDIT_MOVIE_CLICK') {
+        console.log("gaga")
         state.movie_to_edit = action.payload
     }
     return state

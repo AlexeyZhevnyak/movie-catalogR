@@ -18,6 +18,7 @@ export function Edit() {
 
     }
     const store = useContext(StoreContext);
+
     let movieDto: AddMovieDTO = {
         title: "",
         genres: ["Test"],

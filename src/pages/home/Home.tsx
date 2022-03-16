@@ -72,17 +72,17 @@ export function Home() {
     }
 
     return (
-            <div className={styles.wrapper}>
-                {store.getState().is_card_clicked ?
-                    <MovieDetailsHeader onClick={() => store.dispatch({type: 'SWITCH_TO_FIND_CLICK'})}
-                                        movie={store.getState().clicked_card}/> :
-                    <FindHeader/>}
-                <VerticalMenu className={styles.filter_sort_menu}>
-                    <GenreList className={styles.genres} items={genres} onClick={(event) => filterMovies(event)}/>
-                    <SelectSort className={styles.select_sort} sortFields={sortFields} sortFunction={sortFunction}/>
-                </VerticalMenu>
-                <div style={{alignSelf: "center"}}>{moviesToView.length} movies found</div>
-                <MovieList className={styles.cards} movies={firstRender()}/>
-            </div>
+        <div className={styles.wrapper}>
+            {store.getState().is_card_clicked ?
+                <MovieDetailsHeader onClick={() => store.dispatch({type: 'SWITCH_TO_FIND_CLICK'})}
+                                    movie={store.getState().clicked_card}/> :
+                <FindHeader/>}
+            <VerticalMenu className={styles.filter_sort_menu}>
+                <GenreList className={styles.genres} items={genres} onClick={(event) => filterMovies(event)}/>
+                <SelectSort className={styles.select_sort} sortFields={sortFields} sortFunction={sortFunction}/>
+            </VerticalMenu>
+            <div style={{alignSelf: "center"}}>{moviesToView.length} movies found</div>
+            <MovieList className={styles.cards} movies={firstRender()}/>
+        </div>
     );
 }
