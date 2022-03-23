@@ -5,6 +5,7 @@ import {AddMovieDTO} from "../../model/add-movie-dto";
 
 export function Add() {
     let movie = {
+        id: 0,
         title: "",
         genres: ["Test"],
         vote_count: 0,
@@ -18,11 +19,11 @@ export function Add() {
         poster_path: ""
     };
 
-    const sendMovie = (movieDto : AddMovieDTO) => {
+    const sendMovie = (movieDto: AddMovieDTO) => {
         console.log(movieDto)
         fetch("http://localhost:4000/movies", {
             method: 'POST',
-            mode : 'cors',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },

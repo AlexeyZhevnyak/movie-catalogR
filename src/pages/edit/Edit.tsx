@@ -5,7 +5,7 @@ import React, {useContext} from "react";
 import {StoreContext} from "../../components/app/App";
 
 export function Edit() {
-    const sendMovie = (movieDto: AddMovieDTO) => {
+    const editMovie = (movieDto: AddMovieDTO) => {
         fetch("http://localhost:4000/movies", {
             method: 'PUT',
             mode: 'cors',
@@ -48,8 +48,8 @@ export function Edit() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title_form}>ADD MOVIE</h1>
-            <MovieForm movie={movieDto} onSubmitEvent={sendMovie}/>
+            <h1 className={styles.title_form}>EDIT MOVIE</h1>
+            <MovieForm movie={store.getState().movie_to_edit} onSubmitEvent={editMovie}/>
         </div>
     )
 }

@@ -1,17 +1,14 @@
 import {Movie} from "../../model/movie";
 import MovieCard from "../movieCard/MovieCard";
-import React, {useContext} from "react";
-import {StoreContext} from "../app/App";
+import React from "react";
+import {useNavigate} from "react-router";
 
 export function MovieList(props: {
     movies: Movie[],
     className : string
 }) {
-    const store = useContext(StoreContext);
+    const navigate = useNavigate();
     return <div className={props.className}>
-        {props.movies.map(m => <MovieCard movie={m} onClick={() => store.dispatch({
-            type: 'CARD_CLICK',
-            payload: m
-        })} key={m.id}/>)}
+        {props.movies.map(m => <MovieCard movie={m} onClick={() => navigate(`${m.id}`)} key={m.id}/>)}
     </div>
 }
