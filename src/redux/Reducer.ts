@@ -3,7 +3,7 @@ import {Action} from "./Action";
 
 export function reducer(state: State, action: Action): State {
     if (action.type === 'CARD_CLICK') {
-        state.isCardClicked = true;
+        state.is_card_clicked = true;
         state.clicked_card = action.payload
         return state
     }
@@ -14,11 +14,16 @@ export function reducer(state: State, action: Action): State {
     }
 
     if (action.type === 'SWITCH_TO_FIND_CLICK') {
-        state.isCardClicked = false
+        state.is_card_clicked = false
     }
 
     if (action.type === 'GENRE_FILTER_CLICK') {
 
+    }
+
+    if (action.type === 'EDIT_MOVIE_CLICK') {
+        console.log("gaga")
+        state.movie_to_edit = action.payload
     }
     return state
 }
