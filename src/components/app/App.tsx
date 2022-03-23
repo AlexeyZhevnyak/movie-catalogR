@@ -15,7 +15,7 @@ function App() {
         <StoreContext.Provider value={store}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/*" element={<Home/>}/>
                     <Route path="/add" element={<Add/>}/>
                     <Route path="/edit" element={<Edit/>}/>
                 </Routes>

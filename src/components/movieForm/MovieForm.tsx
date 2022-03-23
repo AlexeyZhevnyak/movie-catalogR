@@ -1,68 +1,80 @@
 import {AddMovieDTO} from "../../model/add-movie-dto";
 import styles from "./MovieForm.module.css";
-import React, {useState} from "react";
+import React from "react";
+import {useFormik} from "formik";
+import {Movie} from "../../model/movie";
 
 export function MovieForm(props: {
-    movie: AddMovieDTO,
+    movie: Movie,
     onSubmitEvent: (movie: AddMovieDTO) => void
 }) {
-    const [movieToSend, setMovieToSend] = useState<AddMovieDTO>(JSON.parse(JSON.stringify(props.movie)))
-
-    const setValue = (event: React.ChangeEvent, field: keyof AddMovieDTO) => {
-        const element = event.target as HTMLSelectElement;
-        setMovieToSend(prevState => ({
-            ...prevState,
-            [field]: element.value
-        }));
-    }
+    const formik = useFormik({
+        initialValues: {
+            id: props.movie.id,
+            title: props.movie.title,
+            genres: props.movie.genres,
+            runtime: props.movie.runtime,
+            overview: props.movie.overview,
+            poster_path: props.movie.poster_path,
+            release_date: props.movie.release_date,
+            tagline: props.movie.tagline,
+            vote_average: props.movie.vote_average,
+            vote_count: props.movie.vote_count,
+            budget: props.movie.budget,
+            revenue: props.movie.revenue
+        },
+        onSubmit: values => {
+            values.vote_average = Number(values.vote_average);
+            values.vote_count = Number(values.vote_count);
+            values.revenue = Number(values.revenue);
+            values.runtime = Number(values.runtime);
+            props.onSubmitEvent(values)
+        },
+    });
     return (
-        <form method="post" className={styles.container}>
-            <div>
-                <label>TITLE</label>
-                <input type={"text"} value={movieToSend.title}
-                       onChange={(event) => setValue(event, "title")}/>
-            </div>
-            <div>
-                <label>RELEASE DATE</label>
-                <input type="date" value={movieToSend.release_date}
-                       onChange={(event) => setValue(event, "release_date")}/>
-            </div>
-            <div>
-                <label>MOVIE URL</label>
-                <input type="text" value={movieToSend.poster_path}
-                       onChange={(event) => setValue(event, "release_date")}/>
-            </div>
-            <div>
-                <label>OVERVIEW</label>
-                <input type="text" value={movieToSend.overview} onChange={(event) => setValue(event, "overview")}/>
-            </div>
-            <div>
-                <label>RUNTIME</label>
-                <input type="text" value={movieToSend.runtime} onChange={(event) => setValue(event, "runtime")}/>
-            </div>
-            <div>
-                <label>REVENUE</label>
-                <input type="text" value={movieToSend.revenue.toString()}
-                       onChange={(event) => setValue(event, "revenue")}/>
-            </div>
-            <div>
-                <label>TAGLINE</label>
-                <input type="text" value={movieToSend.tagline} onChange={(event) => setValue(event, "tagline")}/>
-            </div>
-            <div>
-                <label>VOTE AVERAGE</label>
-                <input type="text" value={movieToSend.vote_average.toString()}
-                       onChange={(event) => setValue(event, "vote_average")}/>
-            </div>
-            <div>
-                <label>VOTE COUNT</label>
-                <input type="text" value={movieToSend.vote_count.toString()}
-                       onChange={(event) => setValue(event, "vote_count")}/>
-            </div>
-            <div className={styles.buttons}>
-                <button>RESET</button>
-                <input type={"submit"} onSubmit={() => props.onSubmitEvent(movieToSend)}/>
-            </div>
-        </form>
+        <>
+            <form method="post" className={styles.container} onSubmit={formik.handleSubmit}>
+                <div>
+                    <label>TITLE</label>
+                    <input type={"text"} name={"title"} onChange={formik.handleChange} value={formik.values.title}/>
+                </div>
+                <div>
+                    <label>RELEASE DATE</label>
+                    <input type="date" name={"release_date"} onChange={formik.handleChange} value={formik.values.release_date}/>
+                </div>
+                <div>
+                    <label>MOVIE URL</label>
+                    <input type="text" name={"poster_path"} onChange={formik.handleChange} value={formik.values.poster_path}/>
+                </div>
+                <div>
+                    <label>OVERVIEW</label>
+                    <input type="text" name={"overview"} onChange={formik.handleChange} value={formik.values.overview}/>
+                </div>
+                <div>
+                    <label>RUNTIME</label>
+                    <input type="text" name={"runtime"} onChange={formik.handleChange} value={formik.values.runtime}/>
+                </div>
+                <div>
+                    <label>REVENUE</label>
+                    <input type="text" name={"revenue"} onChange={formik.handleChange} value={formik.values.revenue.toString()}/>
+                </div>
+                <div>
+                    <label>TAGLINE</label>
+                    <input type="text" name={"tagline"} onChange={formik.handleChange} value={formik.values.tagline}/>
+                </div>
+                <div>
+                    <label>VOTE AVERAGE</label>
+                    <input type="text" name={"vote_average"} onChange={formik.handleChange} value={formik.values.vote_average.toString()}/>
+                </div>
+                <div>
+                    <label>VOTE COUNT</label>
+                    <input type="text" name={"vote_count"} onChange={formik.handleChange} value={formik.values.vote_count.toString()}/>
+                </div>
+                <div className={styles.buttons}>
+                    <button>RESET</button>
+                    <input type={"submit"}/>
+                </div>
+            </form>
+        </>
     )
 }
