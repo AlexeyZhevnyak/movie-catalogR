@@ -33,17 +33,17 @@ export function Edit() {
         poster_path: ""
     };
     let movie = store.getState().movie_to_edit;
-    movieDto.tagline = movie.tagline;
-    movieDto.revenue = movie.revenue;
-    movieDto.vote_count = movie.vote_count;
-    movieDto.runtime = movie.runtime;
-    movieDto.title = movie.title;
-    movieDto.vote_average = movie.vote_average;
-    movieDto.overview = movie.overview;
-    movieDto.genres = movie.genres;
-    movieDto.release_date = movie.release_date;
-    movieDto.budget = movie.budget;
-    movieDto.poster_path = movie.poster_path;
+    movieDto.tagline = movie._tagline;
+    movieDto.revenue = movie._revenue;
+    movieDto.vote_count = movie._vote_count;
+    movieDto.runtime = movie._runtime;
+    movieDto.title = movie._title;
+    movieDto.vote_average = movie._vote_average;
+    movieDto.overview = movie._overview;
+    movieDto.genres = movie._genres;
+    movieDto.release_date = movie._release_date;
+    movieDto.budget = movie._budget;
+    movieDto.poster_path = movie._poster_path;
 
 
     return (

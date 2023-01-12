@@ -5,18 +5,18 @@ import {AddMovieDTO} from "../../model/add-movie-dto";
 
 export function Add() {
     let movie = {
-        id: 0,
-        title: "",
-        genres: ["Test"],
-        vote_count: 0,
-        vote_average: 0,
-        tagline: "",
-        runtime: 0,
-        revenue: 0,
-        overview: "",
-        budget: 0,
-        release_date: "",
-        poster_path: ""
+        _id: 0,
+        _title: "",
+        _genres: ["Test"],
+        _vote_count: 0,
+        _vote_average: 0,
+        _tagline: "",
+        _runtime: 0,
+        _revenue: 0,
+        _overview: "",
+        _budget: 0,
+        _release_date: "",
+        _poster_path: ""
     };
 
     const sendMovie = (movieDto: AddMovieDTO) => {

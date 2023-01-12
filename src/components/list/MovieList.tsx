@@ -9,6 +9,6 @@ export function MovieList(props: {
 }) {
     const navigate = useNavigate();
     return <div className={props.className}>
-        {props.movies.map(m => <MovieCard movie={m} onClick={() => navigate(`${m.id}`)} key={m.id}/>)}
+        {props.movies.map(m => <MovieCard movie={m} onClick={() => navigate(`${m._id}`)} key={m._id}/>)}
     </div>
 }

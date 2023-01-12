@@ -1,14 +1,14 @@
 export interface Movie {
-    id: number
-    title: string
-    tagline: string
-    vote_average: number
-    vote_count: number
-    release_date: string
-    poster_path: string
-    overview: string
-    budget: number
-    revenue: number
-    genres: string[]
-    runtime: number
+    _id: number
+    _title: string
+    _tagline: string
+    _vote_average: number
+    _vote_count: number
+    _release_date: string
+    _poster_path: string
+    _overview: string
+    _budget: number
+    _revenue: number
+    _genres: string[]
+    _runtime: number
 }

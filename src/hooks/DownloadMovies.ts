@@ -7,12 +7,12 @@ export function useDownloadMovies(url: string): Movie[] {
     const test = useRef<Movie[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:4000/movies?limit=12")
+        fetch("http://localhost:3000/movies/")
             .then(res => res.json())
             .then(
                 (result) => {
-                   test.current = result.data;
-                   setMovies(result.data)
+                   test.current = result;
+                   setMovies(result)
                 })
     }, [])
 

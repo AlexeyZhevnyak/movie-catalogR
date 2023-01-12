@@ -10,18 +10,18 @@ export function MovieForm(props: {
 }) {
     const formik = useFormik({
         initialValues: {
-            id: props.movie.id,
-            title: props.movie.title,
-            genres: props.movie.genres,
-            runtime: props.movie.runtime,
-            overview: props.movie.overview,
-            poster_path: props.movie.poster_path,
-            release_date: props.movie.release_date,
-            tagline: props.movie.tagline,
-            vote_average: props.movie.vote_average,
-            vote_count: props.movie.vote_count,
-            budget: props.movie.budget,
-            revenue: props.movie.revenue
+            id: props.movie._id,
+            title: props.movie._title,
+            genres: props.movie._genres,
+            runtime: props.movie._runtime,
+            overview: props.movie._overview,
+            poster_path: props.movie._poster_path,
+            release_date: props.movie._release_date,
+            tagline: props.movie._tagline,
+            vote_average: props.movie._vote_average,
+            vote_count: props.movie._vote_count,
+            budget: props.movie._budget,
+            revenue: props.movie._revenue
         },
         onSubmit: values => {
             values.vote_average = Number(values.vote_average);

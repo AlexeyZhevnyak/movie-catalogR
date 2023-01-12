@@ -22,7 +22,7 @@ export function Home() {
     const sortFunction = (event: React.MouseEvent<Element, MouseEvent>) => {
         const element = event.target as HTMLSelectElement;
         const field = element.value as keyof Movie;
-        if (field === "release_date") {
+        if (field === "_release_date") {
             setMoviesToView([...movies.sort((a: Movie, b: Movie) => new Date(a[field]).getTime() - new Date(b[field]).getTime())])
         } else
             setMoviesToView([...movies.sort((a: Movie, b: Movie) => Number(a[field]) - Number(b[field]))])
@@ -32,23 +32,23 @@ export function Home() {
     const sortFields: SelectOption[] = [
         {
             title: "Votes",
-            field: "vote_average"
+            field: "_vote_average"
         },
         {
             title: "Release date",
-            field: "release_date"
+            field: "_release_date"
         },
         {
             title: "Budget",
-            field: "budget"
+            field: "_budget"
         },
         {
             title: "Revenue",
-            field: "revenue"
+            field: "_revenue"
         },
         {
             title: "Runtime",
-            field: "runtime"
+            field: "_runtime"
         }
     ];
     const firstRender = () => {
@@ -58,7 +58,7 @@ export function Home() {
     }
     store.subscribe(() => {
             setMoviesToView(movies.filter(m =>
-                m.title.toUpperCase().includes(store.getState().movie_to_find.toUpperCase())))
+                m._title.toUpperCase().includes(store.getState().movie_to_find.toUpperCase())))
         }
     )
 
@@ -67,7 +67,7 @@ export function Home() {
         let temp = Array.from(movies);
 
         if (target.innerText !== "All")
-            temp = movies.filter(m => m.genres.includes(target.innerText))
+            temp = movies.filter(m => m._genres.includes(target.innerText))
 
         setMoviesToView([...temp]);
     }

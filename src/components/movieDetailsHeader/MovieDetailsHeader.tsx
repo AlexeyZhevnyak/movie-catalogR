@@ -6,18 +6,18 @@ import {useParams} from "react-router";
 export function MovieDetailsHeader() {
     let params = useParams();
     const [movie, setMovie] = useState<Movie>({
-        id: 0,
-        title: "",
-        genres: ["Test"],
-        vote_count: 0,
-        vote_average: 0,
-        tagline: "",
-        runtime: 0,
-        revenue: 0,
-        overview: "",
-        budget: 0,
-        release_date: "",
-        poster_path: ""
+        _id: 0,
+        _title: "",
+        _genres: ["Test"],
+        _vote_count: 0,
+        _vote_average: 0,
+        _tagline: "",
+        _runtime: 0,
+        _revenue: 0,
+        _overview: "",
+        _budget: 0,
+        _release_date: "",
+        _poster_path: ""
     });
 
     useEffect(() => {
@@ -37,18 +37,18 @@ export function MovieDetailsHeader() {
                 <button>back</button>
             </div>
             <div className={styles.poster_details}>
-                <img src={movie.poster_path} alt={"poster"}/>
+                <img src={movie._poster_path} alt={"poster"}/>
                 <div className={styles.details}>
                     <div className={styles.title_vote}>
-                        <h1>{movie.title}</h1>
-                        <h1>{movie.vote_average}</h1>
+                        <h1>{movie._title}</h1>
+                        <h1>{movie._vote_average}</h1>
                     </div>
                     <div className={styles.year_runtime}>
-                        <div>{new Date(movie.release_date).getFullYear()}</div>
-                        <div>{movie.runtime} min</div>
+                        <div>{new Date(movie._release_date).getFullYear()}</div>
+                        <div>{movie._runtime} min</div>
                     </div>
                     <div>
-                        <p>{movie.overview}</p>
+                        <p>{movie._overview}</p>
                     </div>
                 </div>
             </div>

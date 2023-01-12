@@ -14,17 +14,17 @@ export const initialState: State = {
     clicked_card: null as any,
     clicked_genre_filter: 'ALL',
     movie_to_edit: {
-        title: "Title",
-        genres: ["Test"],
-        vote_count: 200,
-        vote_average: 2.4,
-        tagline: "Tagline",
-        runtime: 200,
-        revenue: 0,
-        overview: "",
-        budget: 0,
-        release_date: "",
-        poster_path: "",
-        id : 0
+        _title: "Title",
+        _genres: ["Test"],
+        _vote_count: 200,
+        _vote_average: 2.4,
+        _tagline: "Tagline",
+        _runtime: 200,
+        _revenue: 0,
+        _overview: "",
+        _budget: 0,
+        _release_date: "",
+        _poster_path: "",
+        _id : 0
     }
 }
