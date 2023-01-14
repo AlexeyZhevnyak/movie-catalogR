@@ -1,31 +1,34 @@
-.wrapper{
+.wrapper {
     display: grid;
 }
-.poster_details{
+
+.poster_details {
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr 2fr;
 }
-img{
+
+img {
     height: 400px;
     width: 270px;
 }
-.logo_backButton{
+
+.logo_backButton {
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between
 }
 
-.title_vote{
+.title_vote {
     display: grid;
     grid-auto-flow: column;
 }
 
-.details{
+.details {
     display: grid;
 }
 
-.year_runtime{
+.year_runtime {
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr 9fr;

@@ -5,7 +5,7 @@ import {SelectOption} from "../../model/selectOption";
 export function SelectSort(props: {
     sortFields: SelectOption[],
     sortFunction: (event: React.MouseEvent<Element, MouseEvent>) => void,
-    className : string
+    className: string
 }) {
     return (
         <div className={props.className}>

@@ -51,13 +51,13 @@ option {
     font-size: 10pt;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     align-content: space-around;
 }
 
-.menu_list{
+.menu_list {
     display: flex;
     flex-direction: row;
 }

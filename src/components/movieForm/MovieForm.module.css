@@ -1,4 +1,4 @@
-input:not([type = submit]){
+input:not([type = submit]) {
     background-color: rgb(42, 42, 42);
     outline: none;
     border: none;

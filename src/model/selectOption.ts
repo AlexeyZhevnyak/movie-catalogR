@@ -1,7 +1,7 @@
 import {Movie} from "./movie";
 
 export interface SelectOption {
-  title: string;
-  field: keyof Movie;
+    title: string;
+    field: keyof Movie;
 }
 

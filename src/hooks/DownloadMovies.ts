@@ -11,8 +11,8 @@ export function useDownloadMovies(): Movie[] {
             .then(res => res.json())
             .then(
                 (result) => {
-                   test.current = result;
-                   setMovies(result)
+                    test.current = result;
+                    setMovies(result)
                 })
     }, [])
 

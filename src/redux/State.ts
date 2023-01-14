@@ -27,6 +27,6 @@ export const initialState: State = {
         _budget: 0,
         _release_date: "",
         _poster_path: "",
-        _id : 0
+        _id: 0
     }
 }

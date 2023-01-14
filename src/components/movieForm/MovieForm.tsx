@@ -40,11 +40,13 @@ export function MovieForm(props: {
                 </div>
                 <div>
                     <label>RELEASE DATE</label>
-                    <input type="date" name={"release_date"} onChange={formik.handleChange} value={formik.values.release_date}/>
+                    <input type="date" name={"release_date"} onChange={formik.handleChange}
+                           value={formik.values.release_date}/>
                 </div>
                 <div>
                     <label>MOVIE URL</label>
-                    <input type="text" name={"poster_path"} onChange={formik.handleChange} value={formik.values.poster_path}/>
+                    <input type="text" name={"poster_path"} onChange={formik.handleChange}
+                           value={formik.values.poster_path}/>
                 </div>
                 <div>
                     <label>OVERVIEW</label>
@@ -56,7 +58,8 @@ export function MovieForm(props: {
                 </div>
                 <div>
                     <label>REVENUE</label>
-                    <input type="text" name={"revenue"} onChange={formik.handleChange} value={formik.values.revenue.toString()}/>
+                    <input type="text" name={"revenue"} onChange={formik.handleChange}
+                           value={formik.values.revenue.toString()}/>
                 </div>
                 <div>
                     <label>TAGLINE</label>
@@ -64,11 +67,13 @@ export function MovieForm(props: {
                 </div>
                 <div>
                     <label>VOTE AVERAGE</label>
-                    <input type="text" name={"vote_average"} onChange={formik.handleChange} value={formik.values.vote_average.toString()}/>
+                    <input type="text" name={"vote_average"} onChange={formik.handleChange}
+                           value={formik.values.vote_average.toString()}/>
                 </div>
                 <div>
                     <label>VOTE COUNT</label>
-                    <input type="text" name={"vote_count"} onChange={formik.handleChange} value={formik.values.vote_count.toString()}/>
+                    <input type="text" name={"vote_count"} onChange={formik.handleChange}
+                           value={formik.values.vote_count.toString()}/>
                 </div>
                 <div className={styles.buttons}>
                     <button>RESET</button>

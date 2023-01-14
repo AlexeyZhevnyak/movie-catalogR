@@ -3,7 +3,7 @@ import React, {MouseEventHandler} from "react";
 export function GenreList(props: {
     items: string[],
     onClick: MouseEventHandler,
-    className : string
+    className: string
 }) {
     return (
         <div className={props.className}>

@@ -1,7 +1,6 @@
 import styles from './MovieCard.module.scss'
 import {Movie} from "../../model/movie";
 import {MouseEventHandler} from "react";
-import {MovieCardMenu} from "../movieCardMenu/MovieCardMenu";
 
 function MovieCard(props: {
     movie: Movie,

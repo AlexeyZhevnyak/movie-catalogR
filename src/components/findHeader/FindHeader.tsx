@@ -8,7 +8,7 @@ export function FindHeader() {
                 const e = event.target as HTMLInputElement;
                 dispatch({
                     type: 'MOVIE_FIND_KEYDOWN',
-                    payload : e.value
+                    payload: e.value
                 })
             }}/>
         </div>

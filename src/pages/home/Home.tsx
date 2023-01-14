@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Movie} from "../../model/movie";
 import {useDownloadMovies} from "../../hooks/DownloadMovies";
 import {SelectOption} from "../../model/selectOption";
@@ -14,14 +14,14 @@ import {MovieDetailsHeader} from "../../components/movieDetailsHeader/MovieDetai
 import {AsideFilterMenu} from "../../components/views/asideFilterMenu";
 
 import {State} from "../../redux/State";
-import { useSelector } from "react-redux/es/exports";
+import {useSelector} from "react-redux/es/exports";
 import {useDispatch} from "react-redux";
 
 export function Home() {
-    const findMovies = useSelector((state : State) => {
+    const findMovies = useSelector((state: State) => {
         return state.movie_to_find;
     });
-    useEffect(()=>{
+    useEffect(() => {
         setMoviesToView(findMovies);
     }, [findMovies])
     const dispatch = useDispatch();

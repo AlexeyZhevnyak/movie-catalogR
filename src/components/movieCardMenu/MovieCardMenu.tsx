@@ -23,12 +23,12 @@ export function MovieCardMenu(props: {
                 <ul className="header-list">
                     <li onClick={() => {
                         store.dispatch({
-                            type : 'EDIT_MOVIE_CLICK',
-                            payload : props.movie
+                            type: 'EDIT_MOVIE_CLICK',
+                            payload: props.movie
                         })
                         navigate('/edit');
                     }}>
-                        <span className="header-elem" >Edit</span>
+                        <span className="header-elem">Edit</span>
                     </li>
                     <li>
                         <span className="header-elemD">Delete</span>

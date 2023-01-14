@@ -5,7 +5,7 @@ import {useNavigate} from "react-router";
 
 export function MovieList(props: {
     movies: Movie[],
-    className : string
+    className: string
 }) {
     const navigate = useNavigate();
     return <div className={props.className}>
