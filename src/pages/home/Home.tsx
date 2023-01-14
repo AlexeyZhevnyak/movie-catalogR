@@ -73,10 +73,7 @@ export function Home() {
     }
 
     return (
-
-
             <div className={styles.wrapper}>
-
                 <Routes>
                     <Route path="" element={<FindHeader/>}/>
                     <Route path="/:id" element={<MovieDetailsHeader/>}/>
@@ -87,10 +84,8 @@ export function Home() {
                     <GenreList className={styles.genres} items={genres} onClick={(event) => filterMovies(event)}/>
                     <SelectSort className={styles.select_sort} sortFields={sortFields} sortFunction={sortFunction}/>
                 </VerticalMenu>
-                <div style={{alignSelf: "center"}}>{moviesToView.length} movies found</div>
+                {/*<div style={{alignSelf: "flex-start"}}>{moviesToView.length} movies found</div>*/}
                 <MovieList className={styles.cards} movies={firstRender()}/>
             </div>
-
-
     );
 }

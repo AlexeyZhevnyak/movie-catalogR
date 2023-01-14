@@ -8,12 +8,7 @@
   justify-content: space-between;
   margin-top: 20px;
   align-items: center;
-}
-
-.outer {
-  position: relative;
-  /*padding: 70px;*/
-  z-index: 37;
+  width: 100%;
 }
 
 .year {
@@ -29,8 +24,9 @@
 .movie_title {
   font-weight: 300;
   -moz-hyphens: auto;
-  -webkit-hyphens: auto;
+  //-webkit-hyphens: unset;
   -ms-hyphens: auto;
+  //word-wrap: break-word;
 }
 
 .movie_card_menu {
@@ -42,10 +38,10 @@
   border-radius: 15px;
 }
 
-
-.outer:hover {
-  .movie_card_menu {
-    visibility: visible;
-    z-index: 100;
-  }
+.outer{
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
