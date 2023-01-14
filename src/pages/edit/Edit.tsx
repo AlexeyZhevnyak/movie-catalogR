@@ -1,8 +1,10 @@
 import {AddMovieDTO} from "../../model/add-movie-dto";
 import styles from "../../components/movieForm/MovieForm.module.css";
 import {MovieForm} from "../../components/movieForm/MovieForm";
-import React, {useContext} from "react";
-import {StoreContext} from "../../components/app/App";
+import React from "react";
+import {useStore} from "react-redux";
+import {State} from "../../redux/State";
+import {Action} from "../../redux/Action";
 
 export function Edit() {
     const editMovie = (movieDto: AddMovieDTO) => {
@@ -17,8 +19,7 @@ export function Edit() {
             .then(res => console.log(res))
 
     }
-    const store = useContext(StoreContext);
-
+    let store = useStore<State, Action>();
     let movieDto: AddMovieDTO = {
         title: "",
         genres: ["Test"],

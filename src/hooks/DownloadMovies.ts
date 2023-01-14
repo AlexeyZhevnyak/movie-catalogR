@@ -1,7 +1,7 @@
 import {Movie} from "../model/movie";
 import {useEffect, useRef, useState} from "react";
 
-export function useDownloadMovies(url: string): Movie[] {
+export function useDownloadMovies(): Movie[] {
     const [movies, setMovies] = useState<Movie[]>([])
     // let movies : Movie[] = [];
     const test = useRef<Movie[]>([]);

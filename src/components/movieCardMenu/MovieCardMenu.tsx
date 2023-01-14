@@ -1,15 +1,16 @@
 import styles from "./MovieCardMenu.module.scss"
 import {useNavigate} from "react-router";
 import {Movie} from "../../model/movie";
-import {useContext} from "react";
-import {StoreContext} from "../app/App";
+import {useStore} from "react-redux";
+import {State} from "../../redux/State";
+import {Action} from "../../redux/Action";
 
 export function MovieCardMenu(props: {
     className: string,
     movie: Movie
 }) {
     const navigate = useNavigate();
-    const store = useContext(StoreContext);
+    let store = useStore<State, Action>();
 
     return (
         <div className={props.className}>

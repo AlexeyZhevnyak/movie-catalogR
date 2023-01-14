@@ -1,16 +1,18 @@
 import {Movie} from "../model/movie";
 
 export interface State {
+    movies: Movie[]
     is_card_clicked: boolean,
-    movie_to_find: string,
+    movie_to_find: Movie[],
     clicked_card: Movie,
     clicked_genre_filter: string,
     movie_to_edit: Movie;
 }
 
 export const initialState: State = {
+    movies: [],
     is_card_clicked: false,
-    movie_to_find: '',
+    movie_to_find: [],
     clicked_card: null as any,
     clicked_genre_filter: 'ALL',
     movie_to_edit: {

@@ -1,13 +1,12 @@
-import React, {useContext} from "react";
-import {StoreContext} from "../app/App";
+import {useDispatch} from "react-redux";
 
 export function FindHeader() {
-    const store = useContext(StoreContext);
+    const dispatch = useDispatch();
     return (
         <div>
             <input type={"text"} onKeyUp={(event) => {
                 const e = event.target as HTMLInputElement;
-                store.dispatch({
+                dispatch({
                     type: 'MOVIE_FIND_KEYDOWN',
                     payload : e.value
                 })

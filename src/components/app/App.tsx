@@ -1,18 +1,20 @@
 import React from 'react';
 import {createStore} from "redux";
 import {reducer} from "../../redux/Reducer";
-import {initialState} from "../../redux/State";
+import {initialState, State} from "../../redux/State";
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
-import {Home} from "../../pages/home/Home";
 import {Add} from "../../pages/add/Add";
 import {Edit} from "../../pages/edit/Edit";
-
-const store = createStore(reducer as any, initialState,)
-export const StoreContext = React.createContext(store);
+import { Provider } from 'react-redux'
+import {Home} from "../../pages/home/Home";
+import {useSelector} from "react-redux/es/exports";
 
 function App() {
+    const store = createStore(reducer as any, initialState,);
+
+
     return (
-        <StoreContext.Provider value={store}>
+        <Provider store={store}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/*" element={<Home/>}/>
@@ -20,7 +22,7 @@ function App() {
                     <Route path="/edit" element={<Edit/>}/>
                 </Routes>
             </BrowserRouter>
-        </StoreContext.Provider>
+        </Provider>
     )
 }
 
