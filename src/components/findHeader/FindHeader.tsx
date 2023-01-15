@@ -1,16 +1,11 @@
-import {useDispatch} from "react-redux";
+import {KeyboardEventHandler} from "react";
 
-export function FindHeader() {
-    const dispatch = useDispatch();
+export function FindHeader(props: {
+    onKeyUpHandle: KeyboardEventHandler
+}) {
     return (
         <div>
-            <input type={"text"} onKeyUp={(event) => {
-                const e = event.target as HTMLInputElement;
-                dispatch({
-                    type: 'MOVIE_FIND_KEYDOWN',
-                    payload: e.value
-                })
-            }}/>
+            <input type={"text"} onKeyUp={props.onKeyUpHandle}/>
         </div>
     )
 }

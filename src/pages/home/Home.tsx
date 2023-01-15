@@ -3,7 +3,6 @@ import {Movie} from "../../model/movie";
 import {useDownloadMovies} from "../../hooks/DownloadMovies";
 import {SelectOption} from "../../model/selectOption";
 import styles from "./Home.module.css";
-import {FindHeader} from "../../components/findHeader/FindHeader";
 import {VerticalMenu} from "../../components/menu/VerticalMenu";
 import {GenreList} from "../../components/genreList/GenreList";
 import {SelectSort} from "../../components/selectSort/SelectSort";
@@ -11,11 +10,12 @@ import {MovieList} from "../../components/list/MovieList";
 import {genres} from "../../model/genres";
 import {Route, Routes} from "react-router-dom";
 import {MovieDetailsHeader} from "../../components/movieDetailsHeader/MovieDetailsHeader";
-import {AsideFilterMenu} from "../../components/views/asideFilterMenu";
+import {AsideFilterMenu} from "../../components/asideFilterMenu/asideFilterMenu";
 
 import {State} from "../../redux/State";
 import {useSelector} from "react-redux/es/exports";
 import {useDispatch} from "react-redux";
+import {FindHeaderWrapper} from "../../wrappers/findHeaderWrapper";
 
 export function Home() {
     const findMovies = useSelector((state: State) => {
@@ -79,7 +79,7 @@ export function Home() {
     return (
         <div className={styles.wrapper}>
             <Routes>
-                <Route path="" element={<FindHeader/>}/>
+                <Route path="" element={<FindHeaderWrapper/>}/>
                 <Route path="/:id" element={<MovieDetailsHeader/>}/>
             </Routes>
 
