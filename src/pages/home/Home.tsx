@@ -10,12 +10,12 @@ import {MovieList} from "../../components/list/MovieList";
 import {genres} from "../../model/genres";
 import {Route, Routes} from "react-router-dom";
 import {MovieDetailsHeader} from "../../components/movieDetailsHeader/MovieDetailsHeader";
-import {AsideFilterMenu} from "../../components/asideFilterMenu/asideFilterMenu";
 
 import {State} from "../../redux/State";
 import {useSelector} from "react-redux/es/exports";
 import {useDispatch} from "react-redux";
 import {FindHeaderWrapper} from "../../wrappers/findHeaderWrapper";
+import {AsideFilterMenu} from "../../wrappers/asideFilterMenu";
 
 export function Home() {
     const findMovies = useSelector((state: State) => {
