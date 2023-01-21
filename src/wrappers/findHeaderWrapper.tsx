@@ -11,5 +11,5 @@ export function FindHeaderWrapper() {
             payload: e.value
         });
     }
-    return <FindHeader onKeyUpHandle = {onKeyUpHandle}></FindHeader>
+    return <FindHeader onKeyUpHandle={onKeyUpHandle}></FindHeader>
 }

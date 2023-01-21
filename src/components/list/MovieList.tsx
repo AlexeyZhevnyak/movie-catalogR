@@ -1,10 +1,10 @@
-import {Movie} from "../../model/movie";
 import MovieCard from "../movieCard/MovieCard";
 import React from "react";
 import {useNavigate} from "react-router";
+import {MovieListItem} from "../../model/movieListItem";
 
 export function MovieList(props: {
-    movies: Movie[],
+    movies: MovieListItem[],
     className: string
 }) {
     const navigate = useNavigate();

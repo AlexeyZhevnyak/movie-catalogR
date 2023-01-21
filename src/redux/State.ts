@@ -1,9 +1,10 @@
 import {Movie} from "../model/movie";
+import {MovieListItem} from "../model/movieListItem";
 
 export interface State {
-    movies: Movie[]
+    movies: MovieListItem[]
     is_card_clicked: boolean,
-    movie_to_find: Movie[],
+    movie_to_find: MovieListItem[],
     clicked_card: Movie,
     clicked_genre_filter: string,
     movie_to_edit: Movie;

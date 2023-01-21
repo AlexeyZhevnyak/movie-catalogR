@@ -1,9 +1,9 @@
 import styles from './MovieCard.module.scss'
-import {Movie} from "../../model/movie";
 import {MouseEventHandler} from "react";
+import {MovieListItem} from "../../model/movieListItem";
 
 function MovieCard(props: {
-    movie: Movie,
+    movie: MovieListItem,
     onClick: MouseEventHandler
 }) {
     return (

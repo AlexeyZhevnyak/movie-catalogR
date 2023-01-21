@@ -16,9 +16,12 @@ export function reducer(state: State, action: Action): State {
     if (action.type === 'MOVIE_FIND_KEYDOWN') {
         let t;
         if (action.payload === '') {
-            return state;
+            return {
+                ...state,
+                movie_to_find: state.movies
+            };
         } else {
-            t = state.movies.filter(m => m._title.includes(action.payload));
+            t = state.movies.filter(m => m._title.toUpperCase().includes(action.payload.toUpperCase()));
         }
         return {
             ...state,
@@ -35,7 +38,6 @@ export function reducer(state: State, action: Action): State {
     }
 
     if (action.type === 'EDIT_MOVIE_CLICK') {
-        console.log("gaga")
         state.movie_to_edit = action.payload
     }
     return state

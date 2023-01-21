@@ -1,11 +1,11 @@
-import {Movie} from "../model/movie";
+import {MovieListItem} from "../model/movieListItem";
 import {useEffect, useState} from "react";
 
-export function useDownloadMovies(): Movie[] {
-    const [movies, setMovies] = useState<Movie[]>([])
+export const useMovieList = (): MovieListItem[] => {
+    const [movies, setMovies] = useState<MovieListItem[]>([])
 
     useEffect(() => {
-        fetch("http://localhost:3000/movies/")
+        fetch("http://localhost:3000/movies/list")
             .then(res => res.json())
             .then(
                 (result) => {

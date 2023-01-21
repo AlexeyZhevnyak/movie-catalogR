@@ -23,7 +23,7 @@ export const FilterSelect = (props: {
                 onChange={props.handleChange}
                 value={props.state}>
                 {
-                    props.items.map(v=><MenuItem key={v} value={v}>{v}</MenuItem>)
+                    props.items.map(v => <MenuItem key={v} value={v}>{v}</MenuItem>)
                 }
             </Select>
         </FormControl>
