@@ -2,6 +2,7 @@ import MovieCard from "../movieCard/MovieCard";
 import React from "react";
 import {useNavigate} from "react-router";
 import {MovieListItem} from "../../model/movieListItem";
+import {redirect} from "react-router-dom";
 
 export function MovieList(props: {
     movies: MovieListItem[],

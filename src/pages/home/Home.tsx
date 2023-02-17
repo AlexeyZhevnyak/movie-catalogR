@@ -31,12 +31,7 @@ export function Home() {
 
     return (
         <div className={styles.wrapper}>
-            <Routes>
-                <Route path="" element={<FindHeaderWrapper/>}/>
-                <Route path="/:id" element={<MovieDetailsHeader/>}/>
-            </Routes>
-
-
+            <FindHeaderWrapper/>
             <VerticalMenu className={styles.filter_sort_menu}>
             </VerticalMenu>
             <div className={styles.menu_list}>

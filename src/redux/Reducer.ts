@@ -33,8 +33,18 @@ export function reducer(state: State, action: Action): State {
         state.is_card_clicked = false
     }
 
-    if (action.type === 'GENRE_FILTER_CLICK') {
+    if (action.type === 'FILTER_BY_GENRE') {
+        if (action.payload === 'Все жанры'){
+            return {
+                ...state,
+                movie_to_find: state.movies
+            }
+        }
 
+        return {
+            ...state,
+            movie_to_find: state.movies.filter(m => m._genres.includes(action.payload))
+        }
     }
 
     if (action.type === 'EDIT_MOVIE_CLICK') {
