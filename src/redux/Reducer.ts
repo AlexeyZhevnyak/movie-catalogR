@@ -47,6 +47,20 @@ export function reducer(state: State, action: Action): State {
         }
     }
 
+    if (action.type === 'FILTER_BY_COUNTRY') {
+        if (action.payload === 'Все страны'){
+            return {
+                ...state,
+                movie_to_find: state.movies
+            }
+        }
+
+        return {
+            ...state,
+            movie_to_find: state.movies.filter(m => m._countries.filter(country => country.name === action.payload).length > 0)
+        }
+    }
+
     if (action.type === 'EDIT_MOVIE_CLICK') {
         state.movie_to_edit = action.payload
     }

@@ -6,4 +6,7 @@ export interface MovieListItem {
     _genres: string[]
     _runtime: number
     _alternativeName: string
+    _countries: {
+        name: string
+    }[]
 }
