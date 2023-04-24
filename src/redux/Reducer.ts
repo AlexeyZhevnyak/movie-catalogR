@@ -34,7 +34,7 @@ export function reducer(state: State, action: Action): State {
     }
 
     if (action.type === 'FILTER_BY_GENRE') {
-        if (action.payload === 'Все жанры'){
+        if (action.payload === 'Все жанры') {
             return {
                 ...state,
                 movie_to_find: state.movies
@@ -48,7 +48,7 @@ export function reducer(state: State, action: Action): State {
     }
 
     if (action.type === 'FILTER_BY_COUNTRY') {
-        if (action.payload === 'Все страны'){
+        if (action.payload === 'Все страны') {
             return {
                 ...state,
                 movie_to_find: state.movies

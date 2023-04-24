@@ -1,25 +1,25 @@
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.main_content{
+.main_content {
   display: flex;
-  //justify-content: center;
+  justify-content: center;
   //align-items: center;
   //background-color: red;
-  //align-self: center;
+  align-self: center;
   width: 80%;
 }
 
-.col75{
+.col75 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-left: 50px;
 }
 
-.col75_row1{
+.col75_row1 {
   display: flex;
   justify-content: flex-start;
   gap: 10px;

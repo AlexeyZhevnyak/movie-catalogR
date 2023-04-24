@@ -3,6 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import styles from "./MoviePage.module.scss"
 import {MovieFull} from "../../model/movieFull";
+import CommentForm from "../../components/commentForm/commentForm";
 
 export const MoviePage = () => {
     const {id} = useParams();
@@ -15,7 +16,7 @@ export const MoviePage = () => {
             })
     }, []);
     const getDirectorsName = () => {
-        let t =  movie?.persons
+        let t = movie?.persons
             .filter(p => p.profession === 'режиссеры')
             .map(p => p.name)
             .join(', ')
@@ -45,5 +46,6 @@ export const MoviePage = () => {
                 <div style={{fontSize: '12px'}}>{movie?.movieLength} минут</div>
             </div>
         </div>
+        <CommentForm movieId={id!}/>
     </div>;
 }

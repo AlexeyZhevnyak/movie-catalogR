@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import styles from "./Home.module.css";
 import {VerticalMenu} from "../../components/menu/VerticalMenu";
 import {MovieList} from "../../components/list/MovieList";
-import {Route, Routes} from "react-router-dom";
-import {MovieDetailsHeader} from "../../components/movieDetailsHeader/MovieDetailsHeader";
 
 import {State} from "../../redux/State";
 import {useSelector} from "react-redux/es/exports";
