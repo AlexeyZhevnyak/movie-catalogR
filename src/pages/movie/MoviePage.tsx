@@ -4,17 +4,23 @@ import {useEffect, useState} from "react";
 import styles from "./MoviePage.module.scss"
 import {MovieFull} from "../../model/movieFull";
 import CommentForm from "../../components/commentForm/commentForm";
+import {CommentsSection} from "../../wrappers/commentsSection";
+import {Comment} from "../../model/comment";
 
 export const MoviePage = () => {
     const {id} = useParams();
     const [movie, setMovie] = useState<MovieFull>();
+    const [comments, setComments] = useState<Comment[]>([]);
     useEffect(() => {
         axios.get(`http://localhost:3000/movies/${id}`)
             .then(response => {
-                console.log(response.data);
                 setMovie(response.data);
             })
-    }, []);
+        axios.get(`http://localhost:3000/comments/movies/${id}`)
+            .then(response => {
+                setComments(response.data)
+            });
+    }, [id]);
     const getDirectorsName = () => {
         let t = movie?.persons
             .filter(p => p.profession === 'режиссеры')
@@ -46,6 +52,6 @@ export const MoviePage = () => {
                 <div style={{fontSize: '12px'}}>{movie?.movieLength} минут</div>
             </div>
         </div>
-        <CommentForm movieId={id!}/>
+        <CommentsSection movieId={id!} comments={comments}/>
     </div>;
 }

@@ -273,3 +273,23 @@ export const COUNTRIES = Object.values({
     yamajka: "Ямайка",
     yaponiya: "Япония",
 });
+
+export const formatDate = (dateString: string): string => {
+    const date = new Date(parseInt(dateString));
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dayBeforeYesterday = new Date(yesterday);
+    dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+        return `Сегодня, ${date.toLocaleTimeString('ru-RU')}`;
+    } else if (date.toDateString() === yesterday.toDateString()) {
+        return `Вчера, ${date.toLocaleTimeString('ru-RU')}`;
+    } else if (date.toDateString() === dayBeforeYesterday.toDateString()) {
+        return `Позавчера, ${date.toLocaleTimeString('ru-RU')}`;
+    } else {
+        const options: Intl.DateTimeFormatOptions = {day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute:'2-digit'};
+        return date.toLocaleDateString('ru-RU', options);
+    }
+}
