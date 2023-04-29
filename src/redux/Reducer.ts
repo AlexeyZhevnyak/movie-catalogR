@@ -1,68 +1,68 @@
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Movie} from "../model/movie";
+import {MovieListItem} from "../model/movieListItem";
+import {fetchMovies} from "./actionCreators";
 import {State} from "./State";
 import {Action} from "./Action";
 
-export function reducer(state: State, action: Action): State {
-    if (action.type === 'DOWNLOAD_ALL_MOVIES') {
-        state.movies = action.payload;
-        return state;
-    }
-
-    if (action.type === 'CARD_CLICK') {
-        state.is_card_clicked = true;
-        state.clicked_card = action.payload
-        return state
-    }
-
-    if (action.type === 'MOVIE_FIND_KEYDOWN') {
-        let t;
-        if (action.payload === '') {
-            return {
-                ...state,
-                movie_to_find: state.movies
-            };
-        } else {
-            t = state.movies.filter(m => m._title.toUpperCase().includes(action.payload.toUpperCase()));
-        }
-        return {
-            ...state,
-            movie_to_find: t
-        };
-    }
-
-    if (action.type === 'SWITCH_TO_FIND_CLICK') {
-        state.is_card_clicked = false
-    }
-
-    if (action.type === 'FILTER_BY_GENRE') {
-        if (action.payload === 'Все жанры') {
-            return {
-                ...state,
-                movie_to_find: state.movies
+const movieSlice = createSlice({
+    name: 'movies',
+    initialState: {
+        movies: [],
+        is_card_clicked: false,
+        movies_to_find: [],
+        clicked_card: {} as Movie,
+        clicked_genre_filter: 'Все жанры',
+        movie_to_edit: {} as Movie,
+    },
+    reducers: {
+        downloadAllMovies: (state: State, action: PayloadAction<MovieListItem[]>) => {
+            state.movies = action.payload;
+        },
+        filterByGenre: (state: State, action: PayloadAction<string>) => {
+            if (action.payload === 'Все жанры') {
+                state.movies_to_find = state.movies;
+            } else {
+                state.movies_to_find = state.movies.filter((m) =>
+                    m._genres.includes(action.payload)
+                );
             }
-        }
-
-        return {
-            ...state,
-            movie_to_find: state.movies.filter(m => m._genres.includes(action.payload))
-        }
-    }
-
-    if (action.type === 'FILTER_BY_COUNTRY') {
-        if (action.payload === 'Все страны') {
-            return {
-                ...state,
-                movie_to_find: state.movies
+        },
+        filterByCountry: (state: State, action: PayloadAction<string>) => {
+            if (action.payload === 'Все страны') {
+                state.movies_to_find = state.movies;
+            } else {
+                state.movies_to_find = state.movies.filter(
+                    (m) =>
+                        m._countries.filter((country) => country.name === action.payload)
+                            .length > 0
+                );
             }
-        }
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchMovies.pending, (state: State) => {
+            // обновляем состояние, когда запрос на получение данных отправлен
+            state.movies = [];
+            state.movies_to_find = [];
+        });
+        builder.addCase(fetchMovies.fulfilled, (state: State, action: Action) => {
+            // сохраняем полученные данные, когда запрос на получение данных успешно завершен
+            state.movies = action.payload;
+            state.movies_to_find = action.payload;
+        });
+        builder.addCase(fetchMovies.rejected, (state: State) => {
+            // обновляем состояние в случае, если запрос на получение данных завершился ошибкой
+            state.movies = [];
+            state.movies_to_find = [];
+        });
+    },
+});
 
-        return {
-            ...state,
-            movie_to_find: state.movies.filter(m => m._countries.filter(country => country.name === action.payload).length > 0)
-        }
-    }
+export const {
+    downloadAllMovies,
+    filterByGenre,
+    filterByCountry,
+} = movieSlice.actions;
 
-    if (action.type === 'EDIT_MOVIE_CLICK') {
-        state.movie_to_edit = action.payload
-    }
-    return state
-}
+export default movieSlice.reducer;

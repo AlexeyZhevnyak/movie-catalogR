@@ -3,7 +3,6 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import styles from "./MoviePage.module.scss"
 import {MovieFull} from "../../model/movieFull";
-import CommentForm from "../../components/commentForm/commentForm";
 import {CommentsSection} from "../../wrappers/commentsSection";
 import {Comment} from "../../model/comment";
 

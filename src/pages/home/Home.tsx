@@ -5,36 +5,19 @@ import {MovieList} from "../../components/list/MovieList";
 
 import {State} from "../../redux/State";
 import {useSelector} from "react-redux/es/exports";
-import {useDispatch} from "react-redux";
-import {FindHeaderWrapper} from "../../wrappers/findHeaderWrapper";
 import {AsideFilterMenu} from "../../wrappers/asideFilterMenu";
-import {useMovieList} from "../../hooks/getMovieList";
 import {MovieListItem} from "../../model/movieListItem";
 
 export function Home() {
-    const findMovies = useSelector((state: State) => state.movie_to_find);
-    useEffect(() => {
-        setMoviesToView(findMovies);
-    }, [findMovies])
-    const dispatch = useDispatch();
-    const movies = useMovieList();
-    const [moviesToView, setMoviesToView] = useState<MovieListItem[]>([...movies]);
-    useEffect(() => {
-        setMoviesToView(movies);
-        dispatch({
-            type: 'DOWNLOAD_ALL_MOVIES',
-            payload: movies
-        })
-    }, [movies])
+    const movies_to_find = useSelector((state: State) => state.movies_to_find);
 
     return (
         <div className={styles.wrapper}>
-            <FindHeaderWrapper/>
             <VerticalMenu className={styles.filter_sort_menu}>
             </VerticalMenu>
             <div className={styles.menu_list}>
                 <AsideFilterMenu></AsideFilterMenu>
-                <MovieList className={styles.cards} movies={moviesToView}/>
+                <MovieList className={styles.cards} movies={movies_to_find}/>
             </div>
         </div>
     );

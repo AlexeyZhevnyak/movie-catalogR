@@ -3,6 +3,7 @@ import {COUNTRIES, GENRES} from "../data";
 import {SelectChangeEvent} from "@mui/material";
 import {FilterSelect} from "../components/filterSelect/filterSelect";
 import {useDispatch} from "react-redux";
+import {downloadAllMovies, filterByCountry, filterByGenre} from "../redux/Reducer";
 
 export const AsideFilterMenu = () => {
     const [genre, setGenre] = useState(GENRES[0]);
@@ -11,10 +12,7 @@ export const AsideFilterMenu = () => {
     const dispatchCountry = useDispatch();
     const handleGenreChange = (event: SelectChangeEvent) => {
         setGenre(event.target.value);
-        dispatchGenre({
-            type: 'FILTER_BY_GENRE',
-            payload: event.target.value
-        });
+        dispatchGenre(filterByGenre(event.target.value));
     };
 
     const handleCountryChange = (event: SelectChangeEvent) => {
@@ -23,6 +21,7 @@ export const AsideFilterMenu = () => {
             type: 'FILTER_BY_COUNTRY',
             payload: event.target.value
         });
+        dispatchCountry(filterByCountry(event.target.value))
     };
 
     return (
