@@ -3,7 +3,7 @@ import {COUNTRIES, GENRES} from "../data";
 import {SelectChangeEvent} from "@mui/material";
 import {FilterSelect} from "../components/filterSelect/filterSelect";
 import {useDispatch} from "react-redux";
-import {downloadAllMovies, filterByCountry, filterByGenre} from "../redux/Reducer";
+import {filterByCountry, filterByGenre} from "../redux/Reducer";
 
 export const AsideFilterMenu = () => {
     const [genre, setGenre] = useState(GENRES[0]);

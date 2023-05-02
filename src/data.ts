@@ -289,7 +289,13 @@ export const formatDate = (dateString: string): string => {
     } else if (date.toDateString() === dayBeforeYesterday.toDateString()) {
         return `Позавчера, ${date.toLocaleTimeString('ru-RU')}`;
     } else {
-        const options: Intl.DateTimeFormatOptions = {day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute:'2-digit'};
+        const options: Intl.DateTimeFormatOptions = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
         return date.toLocaleDateString('ru-RU', options);
     }
 }

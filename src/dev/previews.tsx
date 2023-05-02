@@ -14,7 +14,13 @@ const ComponentPreviews = () => {
                 <ComponentPreviews/>
             </ComponentPreview>
             <ComponentPreview path="/CommentsSection">
-                <CommentsSection movieId={'111543'} comments={[{_id: '1', movieId:'111543', text: 'aa', timestamp: '1111111111111', userId: '2'}]}/>
+                <CommentsSection movieId={'111543'} comments={[{
+                    _id: '1',
+                    movieId: '111543',
+                    text: 'aa',
+                    timestamp: '1111111111111',
+                    userId: '2'
+                }]}/>
             </ComponentPreview>
         </Previews>
     );

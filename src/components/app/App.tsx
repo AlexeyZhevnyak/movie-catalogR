@@ -1,12 +1,13 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
 import {Provider} from 'react-redux'
-import {Home} from "../../pages/home/Home";
-import {MoviePage} from "../../pages/movie/MoviePage";
 import {configureStore} from "@reduxjs/toolkit";
 import reducer from "../../redux/Reducer";
 import {fetchMovies} from "../../redux/actionCreators";
 import Navbar from "../navbar/Navbar";
+import {Movies} from "../../pages/movies/Movies";
+import {Home} from "../../pages/home/Home";
+import {MoviePage} from "../../pages/movie/MoviePage";
 
 function App() {
     const store = configureStore({
@@ -17,12 +18,13 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <Navbar />
+                <Navbar/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/:id" element={<MoviePage/>}/>
-                    {/*<Route path="/add" element={<Add/>}/>*/}
-                    {/*<Route path="/edit" element={<Edit/>}/>*/}
+                    <Route path="/movies" element={<Movies/>}/>
+                    <Route path='/movies/:id' element={<MoviePage/>}/>
+                    <Route path='/movies/:id/createPost' element={<MoviePage/>}/>
+                    {/*<Route path="/movies/*" element={<Navigate to="/" replace={true} />} caseSensitive={false} />*/}
                 </Routes>
             </BrowserRouter>
         </Provider>

@@ -1,7 +1,8 @@
 import MovieCard from "../movieCard/MovieCard";
 import React from "react";
-import {useNavigate} from "react-router";
+
 import {MovieListItem} from "../../model/movieListItem";
+import {useNavigate} from "react-router-dom";
 
 export function MovieList(props: {
     movies: MovieListItem[],
@@ -9,6 +10,6 @@ export function MovieList(props: {
 }) {
     const navigate = useNavigate();
     return <div className={props.className}>
-        {props.movies.map(m => <MovieCard movie={m} onClick={() => navigate(`${m._id}`)} key={m._id}/>)}
+        {props.movies.map(m => <MovieCard movie={m} onClick={() => navigate(`/movies/${m._id}`)} key={m._id}/>)}
     </div>
 }

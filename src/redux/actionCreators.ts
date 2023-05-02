@@ -1,5 +1,3 @@
-import {downloadAllMovies} from "./Reducer";
-import {MovieListItem} from "../model/movieListItem";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
 export const fetchMovies = createAsyncThunk(

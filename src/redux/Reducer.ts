@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Movie} from "../model/movie";
 import {MovieListItem} from "../model/movieListItem";
 import {fetchMovies} from "./actionCreators";
 import {State} from "./State";
@@ -9,16 +8,10 @@ const movieSlice = createSlice({
     name: 'movies',
     initialState: {
         movies: [],
-        is_card_clicked: false,
         movies_to_find: [],
-        clicked_card: {} as Movie,
         clicked_genre_filter: 'Все жанры',
-        movie_to_edit: {} as Movie,
     },
     reducers: {
-        downloadAllMovies: (state: State, action: PayloadAction<MovieListItem[]>) => {
-            state.movies = action.payload;
-        },
         filterByGenre: (state: State, action: PayloadAction<string>) => {
             if (action.payload === 'Все жанры') {
                 state.movies_to_find = state.movies;
@@ -60,7 +53,6 @@ const movieSlice = createSlice({
 });
 
 export const {
-    downloadAllMovies,
     filterByGenre,
     filterByCountry,
 } = movieSlice.actions;

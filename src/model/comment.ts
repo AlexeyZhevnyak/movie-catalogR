@@ -1,4 +1,4 @@
-export interface Comment{
+export interface Comment {
     _id: string,
     movieId: string,
     text: string,

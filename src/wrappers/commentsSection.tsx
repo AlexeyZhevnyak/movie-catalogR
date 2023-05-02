@@ -21,7 +21,7 @@ export const CommentsSection = ({movieId, comments}: {
                             <Grid style={{fontSize: '13px'}} item xs={12}>{formatDate(comment.timestamp)}</Grid>
                         </Grid>
                     </Grid>
-                    <Grid item style={{ wordBreak: 'break-word' }} xs={12}>{comment.text}</Grid>
+                    <Grid item style={{wordBreak: 'break-word'}} xs={12}>{comment.text}</Grid>
                 </>
             ))}
         </Grid>

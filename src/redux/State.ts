@@ -1,4 +1,3 @@
-import {Movie} from "../model/movie";
 import {MovieListItem} from "../model/movieListItem";
 
 export interface State {
