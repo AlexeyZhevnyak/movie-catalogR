@@ -1,8 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {MovieListItem} from "../model/movieListItem";
-import {fetchMovies} from "./actionCreators";
+import {fetchActualMovies, fetchMovies, fetchReviews} from "./actionCreators";
 import {State} from "./State";
 import {Action} from "./Action";
+import {MovieFull} from "../model/movieFull";
+import {Reviews} from "@mui/icons-material";
+import {Review} from "../model/review";
 
 const movieSlice = createSlice({
     name: 'movies',
@@ -10,6 +12,9 @@ const movieSlice = createSlice({
         movies: [],
         movies_to_find: [],
         clicked_genre_filter: 'Все жанры',
+        currentMovie: {} as MovieFull,
+        actualMovies: [],
+        reviews: [] as Review[]
     },
     reducers: {
         filterByGenre: (state: State, action: PayloadAction<string>) => {
@@ -32,6 +37,9 @@ const movieSlice = createSlice({
                 );
             }
         },
+        setCurrentMovie: (state: State, action: PayloadAction<MovieFull>) => {
+            state.currentMovie = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchMovies.pending, (state: State) => {
@@ -49,12 +57,27 @@ const movieSlice = createSlice({
             state.movies = [];
             state.movies_to_find = [];
         });
+        builder.addCase(fetchActualMovies.pending, (state: State) => {
+            // обновляем состояние, когда запрос на получение данных отправлен
+
+        });
+        builder.addCase(fetchActualMovies.fulfilled, (state: State, action: Action) => {
+            state.actualMovies = action.payload;
+        });
+        builder.addCase(fetchActualMovies.rejected, (state: State) => {
+            // обновляем состояние в случае, если запрос на получение данных завершился ошибкой
+
+        });
+        builder.addCase(fetchReviews.fulfilled, (state: State, action: Action) => {
+            state.reviews = action.payload;
+        });
     },
 });
 
 export const {
     filterByGenre,
     filterByCountry,
+    setCurrentMovie
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

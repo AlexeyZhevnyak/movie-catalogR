@@ -1,24 +1,36 @@
 import React from 'react';
 import {Field, FieldArray, Form, Formik} from 'formik';
 import {Button, Chip, TextField} from "@mui/material";
+import axios from "axios";
+import {useParams} from "react-router-dom";
 
 interface Values {
     review: string;
     rating: number;
     tags: string[];
+    userId: string,
+    movieId: string
 }
 
 interface Props {
     movieTitle: string;
     movieYear: number;
     moviePosterUrl: string;
+    movieId: string
 }
 
-const ReviewPage: React.FC<Props> = ({movieTitle, movieYear, moviePosterUrl}) => {
+const ReviewPage: React.FC<Props> = ({movieTitle, movieYear, moviePosterUrl, movieId}) => {
     return (
         <Formik
-            initialValues={{review: '', rating: 0, tags: [] as string[]}}
+            initialValues={{review: '', rating: 0, tags: [] as string[], userId: '2', timestamp: Date.now(), movieId: movieId}}
             onSubmit={(values: Values) => {
+                axios.post('http://localhost:3000/reviews/add', values)
+                    .then(response => {
+                        window.location.reload(); // перезагрузка страницы
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
                 console.log(values);
             }}
         >

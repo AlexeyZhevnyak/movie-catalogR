@@ -6,12 +6,16 @@ import {MovieFull} from "../../model/movieFull";
 import {CommentsSection} from "../../wrappers/commentsSection";
 import {Comment} from "../../model/comment";
 import {Button} from "@mui/material";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/Store";
+import {setCurrentMovie} from "../../redux/Reducer";
 
 export const MoviePage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [movie, setMovie] = useState<MovieFull>();
     const [comments, setComments] = useState<Comment[]>([]);
+    const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
         axios.get(`http://localhost:3000/movies/${id}`)
             .then(response => {
@@ -56,7 +60,10 @@ export const MoviePage = () => {
             </div>
             <CommentsSection movieId={id!} comments={comments}/>
         </div>
-        <Button variant="contained" onClick={() => navigate('createPost')}>
+        <Button variant="contained" onClick={() => {
+            dispatch(setCurrentMovie(movie!));
+            navigate('createPost');
+        }}>
             Рецензия
         </Button>
 
