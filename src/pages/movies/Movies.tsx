@@ -16,7 +16,7 @@ export function Movies() {
 
     useEffect(() => {
         dispatch(fetchMovies())
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div className={styles.wrapper}>

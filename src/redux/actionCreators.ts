@@ -10,10 +10,10 @@ export const fetchMovies = createAsyncThunk(
 );
 
 export const fetchReviews = createAsyncThunk(
-    'review/fetchReviews',
+    'movies/fetchReviews',
     async () => {
-        const response = await axios.get('http://localhost:3000/reviews/');
-        return response.data();
+        const response = await fetch('http://localhost:3000/reviews/');
+        return response.json();
     }
 );
 
@@ -34,6 +34,7 @@ export const fetchActualMovies = createAsyncThunk(
         return response.data.docs;
     }
 );
+
 function getLastMonthPeriod() {
     const today = new Date();
     const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());

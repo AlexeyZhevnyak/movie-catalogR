@@ -7,6 +7,8 @@ import {MoviePage} from "../../pages/movie/MoviePage";
 import CreateReviewPage from "../../pages/createReview/CreateReviewPage";
 import {useSelector} from "react-redux/es/exports";
 import {State} from "../../redux/State";
+import {ReviewsPage} from "../../pages/reviews/ReviewsPage";
+import {LoginPage} from "../../pages/login/LoginPage";
 
 function App() {
     const currentMovie = useSelector((state: State) => state.currentMovie);
@@ -23,6 +25,10 @@ function App() {
                                                                                     moviePosterUrl={currentMovie.poster.previewUrl}
                                                                                     movieYear={currentMovie.year}
                                                                                     movieId={currentMovie.id.toString()}/>}/>}
+                <Route path={'/reviews'} element={<ReviewsPage/>}/>
+                <Route path={'/login'} element={<LoginPage/>}/>
+
+
                 {/*<Route path="/movies/*" element={<Navigate to="/" replace={true} />} caseSensitive={false} />*/}
             </Routes>
         </BrowserRouter>

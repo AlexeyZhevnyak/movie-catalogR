@@ -37,7 +37,7 @@ function Navbar() {
     };
 
     return (
-        <AppBar position="fixed" sx={{bgcolor: '#555555'}}>
+        <AppBar position="sticky" sx={{bgcolor: '#555555'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <AdbIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
@@ -116,10 +116,10 @@ function Navbar() {
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         <Link component={RouterLink} to="/movies" color="inherit" underline="none" sx={{mr: 2}}>
-                            Movies
+                            Фильмы
                         </Link>
-                        <Link component={RouterLink} to="/blogs" color="inherit" underline="none" sx={{mr: 2}}>
-                            Blogs
+                        <Link component={RouterLink} to="/reviews" color="inherit" underline="none" sx={{mr: 2}}>
+                            Рецензии
                         </Link>
                     </Box>
 

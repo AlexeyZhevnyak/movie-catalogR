@@ -2,14 +2,16 @@ import React from 'react';
 import {Field, FieldArray, Form, Formik} from 'formik';
 import {Button, Chip, TextField} from "@mui/material";
 import axios from "axios";
-import {useParams} from "react-router-dom";
 
 interface Values {
-    review: string;
+    text: string;
     rating: number;
     tags: string[];
     userId: string,
-    movieId: string
+    movieId: string,
+    posterUrl: string,
+    movieName: string,
+    movieYear: string
 }
 
 interface Props {
@@ -22,7 +24,17 @@ interface Props {
 const ReviewPage: React.FC<Props> = ({movieTitle, movieYear, moviePosterUrl, movieId}) => {
     return (
         <Formik
-            initialValues={{review: '', rating: 0, tags: [] as string[], userId: '2', timestamp: Date.now(), movieId: movieId}}
+            initialValues={{
+                text: '',
+                rating: 0,
+                tags: [] as string[],
+                userId: '2',
+                timestamp: Date.now(),
+                movieId: movieId,
+                movieYear: movieYear.toString(),
+                movieName: movieTitle,
+                posterUrl: moviePosterUrl
+            }}
             onSubmit={(values: Values) => {
                 axios.post('http://localhost:3000/reviews/add', values)
                     .then(response => {
@@ -40,13 +52,16 @@ const ReviewPage: React.FC<Props> = ({movieTitle, movieYear, moviePosterUrl, mov
                     <h2>{`${movieTitle} (${movieYear})`}</h2>
                     <Field
                         component={TextField}
-                        name="review"
+                        name="text"
                         type="text"
                         placeholder="Напишите свою рецензию"
                         multiline
                         rows={4}
                         inputProps={{
                             style: {color: 'white'},
+                        }}
+                        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                            values.text = (e.target as HTMLInputElement).value;
                         }}
                     />
                     <br/>

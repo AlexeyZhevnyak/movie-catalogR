@@ -1,6 +1,5 @@
 import styles from './MovieCardHome.module.scss'
 import {MouseEventHandler} from "react";
-import {MovieListItem} from "../../model/movieListItem";
 import {MovieFull} from "../../model/movieFull";
 
 function MovieCardHome(props: {

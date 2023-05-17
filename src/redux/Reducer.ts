@@ -3,8 +3,6 @@ import {fetchActualMovies, fetchMovies, fetchReviews} from "./actionCreators";
 import {State} from "./State";
 import {Action} from "./Action";
 import {MovieFull} from "../model/movieFull";
-import {Reviews} from "@mui/icons-material";
-import {Review} from "../model/review";
 
 const movieSlice = createSlice({
     name: 'movies',
@@ -14,7 +12,7 @@ const movieSlice = createSlice({
         clicked_genre_filter: 'Все жанры',
         currentMovie: {} as MovieFull,
         actualMovies: [],
-        reviews: [] as Review[]
+        reviews: []
     },
     reducers: {
         filterByGenre: (state: State, action: PayloadAction<string>) => {
@@ -71,13 +69,22 @@ const movieSlice = createSlice({
         builder.addCase(fetchReviews.fulfilled, (state: State, action: Action) => {
             state.reviews = action.payload;
         });
+        builder.addCase(fetchReviews.rejected, (state: State) => {
+            // обновляем состояние в случае, если запрос на получение данных завершился ошибкой
+            console.log('ades');
+        });
+        builder.addCase(fetchReviews.pending, (state: State) => {
+            // обновляем состояние, когда запрос на получение данных отправлен
+            console.log('ades1');
+
+        });
     },
 });
 
 export const {
     filterByGenre,
     filterByCountry,
-    setCurrentMovie
+    setCurrentMovie,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

@@ -3,7 +3,6 @@ import React from "react";
 
 import {MovieListItem} from "../../model/movieListItem";
 import {useNavigate} from "react-router-dom";
-import {MovieFull} from "../../model/movieFull";
 
 export function MovieList(props: {
     movies: MovieListItem[],

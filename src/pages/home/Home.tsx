@@ -4,10 +4,8 @@ import React, {useEffect} from "react";
 import {AppDispatch} from "../../redux/Store";
 import {useSelector} from "react-redux/es/exports";
 import {State} from "../../redux/State";
-import MovieCard from "../../components/movieCard/MovieCard";
 import MovieCardHome from "../../components/movieCardHome/MovieCardHome";
 import {useNavigate} from "react-router-dom";
-import {setCurrentMovie} from "../../redux/Reducer";
 
 export const Home = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +14,7 @@ export const Home = () => {
 
     useEffect(() => {
         dispatch(fetchActualMovies())
-    },[dispatch])
+    }, [dispatch])
     return <div>
         {actualMovies.map(m => <MovieCardHome movie={m} onClick={() => {
             navigate(`/movies/${m.id}`);
