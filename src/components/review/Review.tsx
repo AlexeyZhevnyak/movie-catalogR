@@ -1,5 +1,16 @@
-import React from 'react';
-import styles from './Review.module.scss';
+import * as React from 'react';
+import {useState} from 'react';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import {red} from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {formatDate} from "../../data";
 
 export const Review = ({
@@ -17,25 +28,55 @@ export const Review = ({
     timestamp: string;
     movieYear: string;
 }) => {
+    const [likesCount, setLikesCount] = useState(0);
+    const [isLiked, setIsLiked] = useState(false);
+
     return (
-        <div className={styles.review}>
-            <img src={moviePoster} alt={movieTitle}/>
-            <div className={styles.info}>
-                <div className={styles.meta}>
-                    <div className={styles.title}>{movieTitle}</div>
-                    <div style={{fontWeight: '100', fontSize: '1.2rem'}} className={styles.movieYear}>{movieYear}</div>
-                </div>
-                <div className={styles.text}>{text}</div>
-                <div className={styles.meta}>
-                    <div className={styles.likes}>
-            <span role="img" aria-label="likes">
-              👍
-            </span>
-                        <span>{likes}</span>
-                    </div>
-                    <div className={styles.timestamp}>{formatDate(timestamp)}</div>
-                </div>
-            </div>
-        </div>
+        <Card sx={{
+            width: '50%',
+            bgcolor: '#555555',
+            margin: '20px',
+        }}>
+            <CardHeader
+                avatar={
+                    <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
+                        R
+                    </Avatar>
+                }
+                action={
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon/>
+                    </IconButton>
+                }
+                title={movieTitle}
+                subheader={formatDate(timestamp)}
+                subheaderTypographyProps={{color: 'white'}}
+            />
+            <CardMedia
+                component="img"
+                height="194"
+                image={moviePoster}
+                alt="Paella dish"
+            />
+            <CardContent>
+                <Typography variant="body2">
+                    {text}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites" onClick={() => {
+                    if (isLiked) {
+                        setLikesCount(likesCount - 1);
+                        setIsLiked(false);
+                    } else {
+                        setLikesCount(likesCount + 1);
+                        setIsLiked(true);
+                    }
+                }}>
+                    <FavoriteIcon style={{color: 'blue'}}/>
+                </IconButton>
+                <Typography>{likesCount}</Typography>
+            </CardActions>
+        </Card>
     );
 };

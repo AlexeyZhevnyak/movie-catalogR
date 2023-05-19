@@ -1,45 +1,48 @@
-import React from "react";
-import {Field, Form, Formik} from "formik";
-import axios from "axios";
+import React, {useEffect, useState} from "react";
+import {FormikValues, useFormik} from "formik";
 
 const CommentForm = (props: {
-    movieId: string
+    movieId: string;
+    onSubmit: (values: any) => void | Promise<any>;
+    email: string;
 }) => {
-    return (
-        <Formik
-            initialValues={{
-                text: '',
-                userId: '2',
-                timestamp: Date.now(),
-                movieId: props.movieId
-            }}
-            onSubmit={(values) => {
-                axios.post('http://localhost:3000/comments/add', values)
-                    .then(response => {
-                        window.location.reload(); // перезагрузка страницы
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }}
-        >
-            {formik => (
-                <Form>
-                    <label htmlFor="text">Email Address</label>
-                    <Field
-                        id="text"
-                        name="text"
-                        placeholder={'Написать комментарий...'}
-                        style={{resize: 'vertical'}}
-                        component="textarea"
-                        rows={3}
-                    />
+    const [initialValues, setInitialValues] = useState({
+        text: "",
+        timestamp: Date.now(),
+        email: "",
+        movieId: props.movieId,
+    });
 
-                    <button type="submit">Submit</button>
-                </Form>
-            )}
-        </Formik>
+    useEffect(() => {
+        setInitialValues({
+            text: "",
+            timestamp: Date.now(),
+            email: props.email,
+            movieId: props.movieId,
+        });
+    }, [props.email]);
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: props.onSubmit,
+        enableReinitialize: true
+    });
+
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <textarea
+                id="text"
+                placeholder="Написать комментарий..."
+                style={{ resize: 'vertical' }}
+                rows={3}
+                value={formik.values.text}
+                onChange={formik.handleChange}
+            />
+            <button type="submit">Submit</button>
+        </form>
     );
 };
+
+
 
 export default CommentForm;

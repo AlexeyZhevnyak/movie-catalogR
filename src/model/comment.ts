@@ -1,7 +1,10 @@
+import {User} from "./user";
+
 export interface Comment {
     _id: string,
-    movieId: string,
+    email: string,
     text: string,
-    userId: string,
-    timestamp: string
+    timestamp: string,
+    likeCount: number,
+    likedUsers: User[]
 }

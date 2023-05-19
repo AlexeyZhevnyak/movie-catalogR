@@ -3,6 +3,7 @@ import {fetchActualMovies, fetchMovies, fetchReviews} from "./actionCreators";
 import {State} from "./State";
 import {Action} from "./Action";
 import {MovieFull} from "../model/movieFull";
+import {User} from "../model/user";
 
 const movieSlice = createSlice({
     name: 'movies',
@@ -12,7 +13,8 @@ const movieSlice = createSlice({
         clicked_genre_filter: 'Все жанры',
         currentMovie: {} as MovieFull,
         actualMovies: [],
-        reviews: []
+        reviews: [],
+        user: {} as User
     },
     reducers: {
         filterByGenre: (state: State, action: PayloadAction<string>) => {
@@ -37,6 +39,9 @@ const movieSlice = createSlice({
         },
         setCurrentMovie: (state: State, action: PayloadAction<MovieFull>) => {
             state.currentMovie = action.payload;
+        },
+        setUser: (state: State, action: PayloadAction<User>) => {
+            state.user = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -76,7 +81,6 @@ const movieSlice = createSlice({
         builder.addCase(fetchReviews.pending, (state: State) => {
             // обновляем состояние, когда запрос на получение данных отправлен
             console.log('ades1');
-
         });
     },
 });
@@ -85,6 +89,7 @@ export const {
     filterByGenre,
     filterByCountry,
     setCurrentMovie,
+    setUser
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

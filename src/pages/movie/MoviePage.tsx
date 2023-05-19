@@ -23,7 +23,13 @@ export const MoviePage = () => {
             })
         axios.get(`http://localhost:3000/comments/movies/${id}`)
             .then(response => {
-                setComments(response.data)
+                let commentsUnsorted = response.data as Comment[];
+                let commentsSorted = commentsUnsorted.sort((a, b) => {
+                    const timestampA = parseInt(a.timestamp);
+                    const timestampB = parseInt(b.timestamp);
+                    return timestampB - timestampA;
+                });
+                setComments(commentsSorted);
             });
     }, [id]);
     const getDirectorsName = () => {

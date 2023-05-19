@@ -15,6 +15,6 @@ export const ReviewsPage = () => {
     }, []);
     return <div className={styles.wrapper}>
         {reviews.map(r => <Review text={r.text} likes={r.likes} movieTitle={r.movieName} timestamp={r.timestamp}
-                                  moviePoster={r.posterUrl} movieYear={r.movieYear}/>)}
+                                  moviePoster={r.posterUrl} movieYear={r.movieYear} key={r.timestamp}/>)}
     </div>
 }

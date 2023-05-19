@@ -12,7 +12,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "@mui/material";
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import {useSelector} from "react-redux/es/exports";
+import {State} from "../../redux/State";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/Store";
+import {setUser} from "../../redux/Reducer";
+import {User} from "../../model/user";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -20,6 +26,9 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const navigate = useNavigate();
+    const user = useSelector((state: State) => state.user);
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -126,7 +135,8 @@ function Navbar() {
                     <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                                <Avatar
+                                    alt="Remy Sharp">{user.email ? user.email.charAt(0).toUpperCase() : 'A'}</Avatar>
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -151,6 +161,17 @@ function Navbar() {
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography sx={{color: '#555555'}} textAlign="center">Профиль</Typography>
                             </MenuItem>
+                            {user.email ?
+                                <MenuItem onClick={() => {
+                                    dispatch(setUser({} as User));
+                                    localStorage.setItem('token', '');
+                                    handleCloseUserMenu();
+                                }}>
+                                    <Typography sx={{color: '#555555'}} textAlign="center">Выйти</Typography>
+                                </MenuItem> :
+                                <MenuItem onClick={() => navigate('/login')}>
+                                    <Typography sx={{color: '#555555'}} textAlign="center">Войти</Typography>
+                                </MenuItem>}
                         </Menu>
                     </Box>
                 </Toolbar>
