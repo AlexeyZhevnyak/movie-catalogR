@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.toggleButtonGroup {
+  color: white;
+}
+
+.toggleButtonGroup .Mui-selected {
+  background-color: #1976d2;
+  color: white;
+}
+
+.toggleButtonGroup .Mui {
+  background-color: white;
+}
+
+.toggleButtonGroup .Mui-selected:hover {
+  background-color: #1976d2;
+}
+
+.toggleButtonGroup .MuiToggleButton-root {
+  color: white;
+}
+
+.toggleButton {
+  margin: 10px;
+  color: white;
+  background-color: #555555;
+}
+
+.gridContainer {
+  width: 80%;
+  align-self: center;
+}

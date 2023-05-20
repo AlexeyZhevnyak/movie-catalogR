@@ -1,20 +1,32 @@
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styles from './LikeCounter.module.css'
+import {FavoriteBorder} from "@mui/icons-material";
 
 export const LikeCounter = ({
                                 initialLikeCount,
                                 onLike,
-                                onDeactivateLike
+                                onDeactivateLike,
+                                initialActive
                             }: {
     initialLikeCount: number,
     onLike: () => void,
-    onDeactivateLike: () => void
+    onDeactivateLike: () => void,
+    initialActive: boolean
 }) => {
     const [likesCount, setLikesCount] = useState(initialLikeCount);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(initialActive);
+    useEffect(() => {
+        setIsLiked(initialActive);
+        setLikesCount(initialLikeCount)
+        console.log(initialActive)
+    }, [initialActive, initialLikeCount]);
+    // useEffect(() => {
+    //     setLikesCount(initialLikeCount)
+    //     console.log(initialLikeCount)
+    // }, [initialLikeCount]);
     return <div className={styles.wrapper}>
         <Typography>{likesCount}</Typography>
         <IconButton aria-label="add to favorites" onClick={() => {
@@ -28,7 +40,7 @@ export const LikeCounter = ({
                 onLike();
             }
         }}>
-            <FavoriteIcon style={{color: 'blue'}}/>
+            {isLiked ? <FavoriteIcon/> : <FavoriteBorder/>}
         </IconButton>
     </div>
 }

@@ -6,5 +6,5 @@ export interface Comment {
     text: string,
     timestamp: string,
     likeCount: number,
-    likedUsers: User[]
+    likedUsers: string[]
 }

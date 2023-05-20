@@ -9,6 +9,7 @@ import {Button} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../redux/Store";
 import {setCurrentMovie} from "../../redux/Reducer";
+import lodash from 'lodash'
 
 export const MoviePage = () => {
     const {id} = useParams();
@@ -17,18 +18,16 @@ export const MoviePage = () => {
     const [comments, setComments] = useState<Comment[]>([]);
     const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
-        axios.get(`http://localhost:3000/movies/${id}`)
-            .then(response => {
-                setMovie(response.data);
-            })
+        // axios.get(`http://localhost:3000/movies/${id}`)
+        //     .then(response => {
+        //         setMovie(response.data);
+        //     })
         axios.get(`http://localhost:3000/comments/movies/${id}`)
             .then(response => {
                 let commentsUnsorted = response.data as Comment[];
-                let commentsSorted = commentsUnsorted.sort((a, b) => {
-                    const timestampA = parseInt(a.timestamp);
-                    const timestampB = parseInt(b.timestamp);
-                    return timestampB - timestampA;
-                });
+                let commentsSorted = lodash.sortBy(commentsUnsorted, [function (o) {
+                    return parseInt(o.timestamp)
+                }])
                 setComments(commentsSorted);
             });
     }, [id]);

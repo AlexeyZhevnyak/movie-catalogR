@@ -5,14 +5,15 @@ import {formatDate} from "../../data";
 import {LikeCounter} from "../likeCounter/LikeCounter";
 import {decLikeCount, incLikeCount} from "../../hooks/hooks";
 
-export const Comment = ({ email, text, timestamp, likeCount, commentId, onLike, onDislike }: {
+export const Comment = ({ email, text, timestamp, likeCount, commentId, onLike, onDislike, initialActive }: {
     email: string,
     timestamp: string,
     text: string,
     likeCount: number,
     commentId: string,
     onLike: () => void,
-    onDislike: () => void
+    onDislike: () => void,
+    initialActive: boolean
 }) => {
     return <>
         <Grid item xs={0} display={'flex'} justifyContent={'flex-start'}>
@@ -26,7 +27,7 @@ export const Comment = ({ email, text, timestamp, likeCount, commentId, onLike, 
         </Grid>
         <Grid item xs={10}>
             <Grid container display={'flex'}>
-                <LikeCounter onDeactivateLike={onDislike} onLike={onLike}
+                <LikeCounter initialActive={initialActive} onDeactivateLike={onDislike} onLike={onLike}
                              initialLikeCount={likeCount}></LikeCounter>
             </Grid>
         </Grid>
